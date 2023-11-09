@@ -1,9 +1,3 @@
-var TextAccesBooleana = localStorage.getItem("acces")
-var acces =  JSON.parse(TextAccesBooleana)
-if (acces){
-  
-  window.location.href = "inici.html"
-}
 
 document.oncontextmenu = function () {
   
