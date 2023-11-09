@@ -1,6 +1,3 @@
-acces = false;
-        var TextAccesBooleana = JSON.stringify(acces);
-            localStorage.setItem('acces', TextAccesBooleana);
 
 function guardarusuari() {
     var usuariacces = document.getElementById("IDnomusuarinici").value; // Obtener el valor del input
