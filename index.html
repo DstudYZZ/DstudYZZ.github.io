@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DStudYZ</title>
+    <link rel="stylesheet" type="text/css" href="estudi.css">
+</head>
+<body>
+    <h1>DStudYZ</h1>
+    <script>
+        acces = false;
+        var TextAccesBooleana = JSON.stringify(acces);
+            localStorage.setItem('acces', TextAccesBooleana);
+        function registrar(){
+            var TextUsuariCreatBooleana = localStorage.getItem("usuaricreat")
+           var usuaricreat =  JSON.parse(TextUsuariCreatBooleana)
+            if (usuaricreat){
+                if (confirm("Atenció: \nJa has creat un usuari, si vols crear un nou perfil, se't borraràn totes les dades. \nUtilitza aquesta opció només si no pots recuperar el compte, o inicies un nou curs")){
+                   localStorage.clear();
+                    var usuaricreat = false;
+       var TextUsuariCreatBooleana = JSON.stringify(usuaricreat);
+       localStorage.setItem('usuaricreat', TextUsuariCreatBooleana);
+
+            window.location.href="registrar.html"
+        }
+                }else{
+                    var usuaricreat = false;
+       var TextUsuariCreatBooleana = JSON.stringify(usuaricreat);
+       localStorage.setItem('usuaricreat', TextUsuariCreatBooleana);
+
+            window.location.href="registrar.html"
+                }
+            }
+                
+            
+            
+        
+        function iniciarsessio(){
+            var TextUsuariCreatBooleana = localStorage.getItem("usuaricreat")
+           var usuaricreat =  JSON.parse(TextUsuariCreatBooleana)
+           if (usuaricreat){
+            window.location.href="inicisessio.html"
+           }else{
+            alert ("No tens cap usuari registrat")
+           }
+         
+        }
+        
+document.oncontextmenu = function () {
+ 
+  return false;
+};
+
+document.onkeydown = function (e) {
+  if (e.keyCode == 123) {
+   
+    return false;
+  }
+
+  if (e.ctrlKey && e.shiftKey && e.keyCode === 73) {
+   
+    return false;
+  }
+  if (e.ctrlKey && e.keyCode == 85){
+   
+    return false;
+  }
+};
+
+
+document.onmousedown = function (e) {
+  if (e.button === 2) {
+   
+    return false;
+  }
+};
+
+
+    </script>
+    <div class="botonsinici">
+    <button onclick="registrar()" class="registrar">Registrar-te</button>
+    <p>
+    <button onclick="iniciarsessio()" class = "iniciarsessio">Iniciar sessió</button>
+         <br>
+    <a href="contacte.html">Contacte</a>
+   
+</div>
+
+</body>
+</html>
