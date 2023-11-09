@@ -1,0 +1,462 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calcular Mitjana - Anglès</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f3f3f3;
+            text-align: center;
+        }
+
+        h1 {
+            background-color: #696c6d;
+            color: #fff;
+            padding: 20px;
+            margin: 0;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 50%;
+            margin: 20px auto;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            text-align: center;
+            padding: 12px;
+        }
+
+        th {
+            background-color: #394248;
+            color: #fff;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+
+        #resultado {
+            font-weight: bold;
+        }
+
+        #enrere-button {
+            float: left;
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+        }
+        #nota-final {
+font-size: 0.8em; /* Reducir el tamaño de la fuente */
+color: #ffffff;     /* Cambiar el color del texto a un tono más tenue */
+margin-left: 60px; /* Agregar un pequeño margen izquierdo para separar del título principal */
+}
+input[type="number"] {
+        width:75px; /* Ajusta el ancho según tus preferencias */
+        padding: 8px;
+        box-sizing: border-box;
+    }
+
+    </style>
+</head>
+<body>
+    <button id="enrere-button" onclick="enrere()">Enrere</button>
+    <h1>Calcular Mitjana - Anglès <span id="nota-final"></span></h1>
+
+    <h3>Criteris</h3>
+    <table>
+        <tr>
+            <th>Nom</th>
+            <th>Mitjana</th>
+            <th>Percentatge de la nota total</th>
+           
+         
+        </tr>
+        <tr>
+            <td>Exàmens</td>
+            <td><span id="mitjanaExamensAngles"></span></td>
+            <td><input type="number" id="percentatgeExamensAngles" onchange="guardarNumero('percentatgeExamensAngles')">%</td>
+        </tr>
+        <tr>
+            <td>Treballs</td>
+            <td><input type="number"  id="notaMitjanaTreballsAngles" onchange="guardarNumero('notaMitjanaTreballsAngles')"></td>
+            <td><input type="number" id="percentatgeTreballsAngles" onchange="guardarNumero('percentatgeTreballsAngles')">%</td>
+        </tr>
+        <tr>
+            <td>Altres</td>
+            <td><input type="number"  id="notaMitjanaAltresAngles" onchange="guardarNumero('notaMitjanaAltresAngles')"></td>
+            <td><span id = "percentatgeAltresAngles"></span></td>
+        </tr>
+    </table>
+    <h3>Examens</h3>
+    <table>
+        <tr>
+            <th>Nom Exàmen</th>
+            <th>Nota</th>
+            <th>Percentatge </th>
+        </tr>
+
+        <tr>
+            <td>
+                Examen1
+            </td>
+            <td>
+                <input type="number" id="notaExamen1Angles" onchange="guardarNumero('notaExamen1Angles')">
+               
+            </td>
+            <td>
+                <input type="number"  id="percentatgeExamen1Angles" onchange="guardarNumero('percentatgeExamen1Angles')">% </td>
+        </tr>
+        <tr>
+            <td>
+                Examen2
+            </td>
+            <td>
+                <input type="number" id="notaExamen2Angles" onchange="guardarNumero('notaExamen2Angles')"></td>
+               
+            </td>
+            <td>
+                <input type="number"  id="percentatgeExamen2Angles"onchange="guardarNumero('percentatgeExamen2Angles')">%</td>
+        </tr>
+        <tr>
+            <td>
+                Examen3
+            </td>
+            <td>
+                <input type="number" id="notaExamen3Angles" onchange="guardarNumero('notaExamen3Angles')"></td>
+               
+            </td>
+            <td>
+                <input type="number"  id="percentatgeExamen3Angles"  onchange="guardarNumero('percentatgeExamen3Angles')">% </td>
+        </tr>
+        <tr>
+            <td>
+                Examen4
+            </td>
+            <td>
+                <input type="number" id="notaExamen4Angles" onchange="guardarNumero('notaExamen4Angles')"></td>
+               
+ </td>
+            <td>
+                <input type="number"  id="percentatgeExamen4Angles"  onchange="guardarNumero('percentatgeExamen4Angles')">%</td>
+        </tr>
+    </table>
+<script >
+    var TextAccesBooleana = localStorage.getItem("acces")
+var acces =  JSON.parse(TextAccesBooleana)
+if (acces){
+
+
+var notaMitjanaTreballsAnglesInput = document.getElementById("notaMitjanaTreballsAngles")
+var percentatgeTreballsAnglesInput = document.getElementById("percentatgeTreballsAngles")
+var percentatgeExamensAnglesInput = document.getElementById('percentatgeExamensAngles');
+var mitjanaExamensAnglesSpan = document.getElementById('mitjanaExamensAngles');
+var percentatgeAltresAngles = document.getElementById('percentatgeAltresAngles')
+var notaMitjanaAltresAnglesInput = document.getElementById('notaMitjanaAltresAngles')
+
+// Inputs d'examens Notes
+var notaExamen1AnglesInput = document.getElementById('notaExamen1Angles') 
+var notaExamen2AnglesInput = document.getElementById('notaExamen2Angles')
+var notaExamen3AnglesInput = document.getElementById('notaExamen3Angles')
+var notaExamen4AnglesInput = document.getElementById('notaExamen4Angles')
+var percentatgeExamen1AnglesInput = document.getElementById('percentatgeExamen1Angles')
+var percentatgeExamen2AnglesInput = document.getElementById('percentatgeExamen2Angles')
+var percentatgeExamen3AnglesInput = document.getElementById('percentatgeExamen3Angles')
+var percentatgeExamen4AnglesInput = document.getElementById('percentatgeExamen4Angles')
+// Cargar valores almacenados en localStorage al cargar la página
+cargarNumero('percentatgeExamensAngles');
+cargarNumero('percentatgeTreballsAngles');
+cargarNumero('percentatgeAltresAngles')
+cargarNumero('notaExamen1Angles')
+cargarNumero('notaExamen2Angles')
+cargarNumero('notaExamen3Angles')  
+cargarNumero('notaExamen4Angles')
+cargarNumero('percentatgeExamen1Angles')
+cargarNumero('percentatgeExamen2Angles')
+cargarNumero('percentatgeExamen3Angles')
+cargarNumero('percentatgeExamen4Angles')
+cargarNumero('notaMitjanaTreballsAngles')
+cargarNumero('notaMitjanaAltresAngles')
+calcularrestant();
+calcularnotafinal();
+calcularmitjanaExamensAngles()
+percentatgeExamensAnglesInput.addEventListener('input', function() {
+    calcularnotafinal();
+  calcularrestant();
+ 
+  calcularmitjanaExamensAngles();
+  guardarNumero('percentatgeExamensAngles');
+});
+
+percentatgeTreballsAnglesInput.addEventListener('input',function(){
+    calcularnotafinal();
+calcularrestant();
+
+calcularmitjanaExamensAngles();
+guardarNumero ('percentatgeTreballsAngles')
+})
+
+
+notaExamen1AnglesInput.addEventListener('input',function(){
+    calcularnotafinal()
+calcularrestant();
+guardarNumero('notaExamen1Angles')
+calcularmitjanaExamensAngles();
+})
+notaExamen2AnglesInput.addEventListener('input',function(){
+    calcularnotafinal()
+calcularrestant();
+guardarNumero('notaExamen2Angles')
+calcularmitjanaExamensAngles();
+})
+notaExamen3AnglesInput.addEventListener('input',function(){
+    calcularnotafinal()
+calcularrestant();
+guardarNumero('notaExamen3Angles')
+calcularmitjanaExamensAngles();
+})
+notaExamen4AnglesInput.addEventListener('input',function(){
+    calcularnotafinal()
+calcularrestant();
+guardarNumero('notaExamen4Angles')
+calcularmitjanaExamensAngles();
+})
+percentatgeExamen1AnglesInput.addEventListener('input',function(){
+calcularrestant();
+calcularnotafinal();
+guardarNumero('percentatgeExamen1Angles')
+calcularmitjanaExamensAngles();
+})
+percentatgeExamen2AnglesInput.addEventListener('input',function(){
+    calcularnotafinal()
+calcularrestant();
+guardarNumero('percentatgeExamen2Angles')
+calcularmitjanaExamensAngles();
+})
+percentatgeExamen3AnglesInput.addEventListener('input',function(){
+    calcularnotafinal()
+calcularrestant();
+guardarNumero('percentatgeExamen3Angles')
+calcularmitjanaExamensAngles();
+})
+percentatgeExamen4AnglesInput.addEventListener('input',function(){
+    calcularnotafinal()
+calcularrestant();
+guardarNumero('percentatgeExamen4Angles')
+calcularmitjanaExamensAngles();
+})
+
+notaMitjanaTreballsAnglesInput.addEventListener('input',function(){
+    calcularnotafinal()
+calcularrestant();
+guardarNumero('notaMitjanaTreballsAnglesInput')
+calcularmitjanaExamensAngles();
+})
+notaMitjanaAltresAnglesInput.addEventListener('input',function(){
+    calcularnotafinal()
+calcularrestant();
+guardarNumero('notaMitjanaAltresAnglesInput')
+calcularmitjanaExamensAngles();
+
+})
+function calcularnotafinal(){
+    var notaExamen1Angles = (parseFloat(notaExamen1AnglesInput.value))      
+var notaExamen2Angles = (parseFloat(notaExamen2AnglesInput.value))  
+var notaExamen3Angles = (parseFloat(notaExamen3AnglesInput.value))  
+var notaExamen4Angles = (parseFloat(notaExamen4AnglesInput.value))  
+var percentatgeExamen1Angles = (parseFloat(percentatgeExamen1AnglesInput.value)*0.01)  
+var percentatgeExamen2Angles = (parseFloat(percentatgeExamen2AnglesInput.value)*0.01)  
+var percentatgeExamen3Angles = (parseFloat(percentatgeExamen3AnglesInput.value)*0.01)  
+var percentatgeExamen4Angles = (parseFloat(percentatgeExamen4AnglesInput.value)*0.01)  
+
+if (isNaN(notaExamen1Angles)){
+notaExamen1Angles = 0;
+}
+if (isNaN(notaExamen2Angles)){
+notaExamen2Angles = 0;
+}
+if (isNaN(notaExamen3Angles)){
+notaExamen3Angles = 0;
+}
+if (isNaN(notaExamen4Angles)){
+notaExamen4Angles = 0;
+}
+if (isNaN(percentatgeExamen1Angles)){
+percentatgeExamen1Angles = 0;
+}
+if (isNaN(percentatgeExamen2Angles)){
+percentatgeExamen2Angles = 0;
+}
+if (isNaN(percentatgeExamen3Angles)){
+percentatgeExamen3Angles = 0;
+}
+if (isNaN(percentatgeExamen4Angles)){
+percentatgeExamen4Angles = 0;
+}
+
+mitjanaExamensAnglesSpan.textContent = ((notaExamen1Angles*percentatgeExamen1Angles)+(notaExamen2Angles*percentatgeExamen2Angles)+(notaExamen3Angles*percentatgeExamen3Angles)+(notaExamen4Angles*percentatgeExamen4Angles));
+
+
+var percentatgeExamensAngles = (parseFloat(percentatgeExamensAnglesInput.value))
+var notaMitjanaTreballsAngles  = (parseFloat(notaMitjanaTreballsAnglesInput.value))
+var notaMitjanaAltresAngles= (parseFloat(notaMitjanaAltresAnglesInput.value))
+var percentatgeTreballsAngles = (parseFloat(percentatgeTreballsAnglesInput.value))
+var mitjanaExamensAnglesNotaFinal = ((notaExamen1Angles*percentatgeExamen1Angles)+(notaExamen2Angles*percentatgeExamen2Angles)+(notaExamen3Angles*percentatgeExamen3Angles)+(notaExamen4Angles*percentatgeExamen4Angles))
+
+
+if (isNaN(mitjanaExamensAnglesNotaFinal)) {
+    mitjanaExamensAnglesNotaFinal = 0; 
+}
+
+if (isNaN(notaMitjanaTreballsAngles)) {
+    notaMitjanaTreballsAngles = 0; 
+}
+if (isNaN(notaMitjanaAltresAngles)) {
+    notaMitjanaAltresAngles = 0; 
+}
+
+if (isNaN(percentatgeTreballsAngles)) {
+percentatgeTreballsAngles = 0; 
+}
+
+if (isNaN(percentatgeExamensAngles)) {
+percentatgeExamensAngles = 0; 
+}
+    percentatgeAltresAngles1 = 100-(percentatgeExamensAngles+percentatgeTreballsAngles);
+
+
+
+    // Calcular la nota final
+   
+var notaFinal = (((mitjanaExamensAnglesNotaFinal)*((percentatgeExamensAngles)*0.01))+((notaMitjanaTreballsAngles)*((percentatgeTreballsAngles)*0.01))+((notaMitjanaAltresAngles)*((percentatgeAltresAngles1)*0.01)))
+if (isNaN(notaFinal)){
+    notaFinal = 0
+}
+
+    // Mostrar la nota final
+    document.getElementById("nota-final").textContent = "Nota Final: " + notaFinal.toFixed(2);
+}
+
+function calcularmitjanaExamensAngles(){
+var notaExamen1Angles = (parseFloat(notaExamen1AnglesInput.value))      
+var notaExamen2Angles = (parseFloat(notaExamen2AnglesInput.value))  
+var notaExamen3Angles = (parseFloat(notaExamen3AnglesInput.value))  
+var notaExamen4Angles = (parseFloat(notaExamen4AnglesInput.value))  
+var percentatgeExamen1Angles = (parseFloat(percentatgeExamen1AnglesInput.value)*0.01)  
+var percentatgeExamen2Angles = (parseFloat(percentatgeExamen2AnglesInput.value)*0.01)  
+var percentatgeExamen3Angles = (parseFloat(percentatgeExamen3AnglesInput.value)*0.01)  
+var percentatgeExamen4Angles = (parseFloat(percentatgeExamen4AnglesInput.value)*0.01)  
+
+if (isNaN(notaExamen1Angles)){
+notaExamen1Angles = 0;
+}
+if (isNaN(notaExamen2Angles)){
+notaExamen2Angles = 0;
+}
+if (isNaN(notaExamen3Angles)){
+notaExamen3Angles = 0;
+}
+if (isNaN(notaExamen4Angles)){
+notaExamen4Angles = 0;
+}
+if (isNaN(percentatgeExamen1Angles)){
+percentatgeExamen1Angles = 0;
+}
+if (isNaN(percentatgeExamen2Angles)){
+percentatgeExamen2Angles = 0;
+}
+if (isNaN(percentatgeExamen3Angles)){
+percentatgeExamen3Angles = 0;
+}
+if (isNaN(percentatgeExamen4Angles)){
+percentatgeExamen4Angles = 0;
+}
+
+mitjanaExamensAnglesSpan.textContent = ((notaExamen1Angles*percentatgeExamen1Angles)+(notaExamen2Angles*percentatgeExamen2Angles)+(notaExamen3Angles*percentatgeExamen3Angles)+(notaExamen4Angles*percentatgeExamen4Angles));
+
+}
+
+
+function calcularrestant(){
+var percentatgeExamensAngles = parseFloat(percentatgeExamensAnglesInput.value)
+var percentatgeTreballsAngles = parseFloat(percentatgeTreballsAnglesInput.value)
+if (isNaN(percentatgeTreballsAngles)) {
+percentatgeTreballsAngles = 0; 
+}
+
+if (isNaN(percentatgeExamensAngles)) {
+percentatgeExamensAngles = 0; 
+}
+    percentatgeAltresAngles.textContent = (100-(percentatgeExamensAngles+percentatgeTreballsAngles)+"%");
+}  
+
+
+function guardarNumero(id) {
+  var input = document.getElementById(id);
+  var valor = input.value;
+  localStorage.setItem(id, valor);
+}
+
+function cargarNumero(id) {
+  var valor = localStorage.getItem(id);
+  if (valor !== null) {
+      document.getElementById(id).value = valor;
+  }
+}
+
+function enrere() {
+  window.location.href = "mitjananotes.html";
+}
+
+
+}else{
+
+window.location.href="404.html"
+}
+   
+document.oncontextmenu = function () {
+  
+  return false;
+};
+
+document.onkeydown = function (e) {
+  if (e.keyCode == 123) {
+    
+    return false;
+  }
+
+  if (e.ctrlKey && e.shiftKey && e.keyCode === 73) {
+    
+    return false;
+  }
+  if (e.ctrlKey && e.keyCode == 85){
+    
+    return false;
+  }
+};
+
+
+document.onmousedown = function (e) {
+  if (e.button === 2) {
+    
+    return false;
+  }
+};
+
+
+</script>
+  
+</body>
+</html>

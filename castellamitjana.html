@@ -1,0 +1,462 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calcular Mitjana - Castellà</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f3f3f3;
+            text-align: center;
+        }
+
+        h1 {
+            background-color: #696c6d;
+            color: #fff;
+            padding: 20px;
+            margin: 0;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 50%;
+            margin: 20px auto;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            text-align: center;
+            padding: 12px;
+        }
+
+        th {
+            background-color: #394248;
+            color: #fff;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+
+        #resultado {
+            font-weight: bold;
+        }
+
+        #enrere-button {
+            float: left;
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+        }
+        #nota-final {
+font-size: 0.8em; /* Reducir el tamaño de la fuente */
+color: #ffffff;     /* Cambiar el color del texto a un tono más tenue */
+margin-left: 60px; /* Agregar un pequeño margen izquierdo para separar del título principal */
+}
+input[type="number"] {
+        width:75px; /* Ajusta el ancho según tus preferencias */
+        padding: 8px;
+        box-sizing: border-box;
+    }
+
+    </style>
+</head>
+<body>
+    <button id="enrere-button" onclick="enrere()">Enrere</button>
+    <h1>Calcular Mitjana - Castellà <span id="nota-final"></span></h1>
+
+    <h3>Criteris</h3>
+    <table>
+        <tr>
+            <th>Nom</th>
+            <th>Mitjana</th>
+            <th>Percentatge de la nota total</th>
+           
+         
+        </tr>
+        <tr>
+            <td>Exàmens</td>
+            <td><span id="mitjanesExamensCastella"></span></td>
+            <td><input type="number" id="percentatgeExamensCastella" onchange="guardarNumero('percentatgeExamensCastella')">%</td>
+        </tr>
+        <tr>
+            <td>Treballs</td>
+            <td><input type="number"  id="notaMitjanaTreballsCastella" onchange="guardarNumero('notaMitjanaTreballsCastella')"></td>
+            <td><input type="number" id="percentatgeTreballsCastella" onchange="guardarNumero('percentatgeTreballsCastella')">%</td>
+        </tr>
+        <tr>
+            <td>Altres</td>
+            <td><input type="number"  id="notaMitjanaAltresCastella" onchange="guardarNumero('notaMitjanaAltresCastella')"></td>
+            <td><span id = "percentatgeAltresCastella"></span></td>
+        </tr>
+    </table>
+    <h3>Examens</h3>
+    <table>
+        <tr>
+            <th>Nom Exàmen</th>
+            <th>Nota</th>
+            <th>Percentatge </th>
+        </tr>
+
+        <tr>
+            <td>
+                Examen1
+            </td>
+            <td>
+                <input type="number" id="notaExamen1Castella" onchange="guardarNumero('notaExamen1Castella')">
+               
+            </td>
+            <td>
+                <input type="number"  id="percentatgeExamen1Castella" onchange="guardarNumero('percentatgeExamen1Castella')">% </td>
+        </tr>
+        <tr>
+            <td>
+                Examen2
+            </td>
+            <td>
+                <input type="number" id="notaExamen2Castella" onchange="guardarNumero('notaExamen2Castella')"></td>
+               
+            </td>
+            <td>
+                <input type="number"  id="percentatgeExamen2Castella"onchange="guardarNumero('percentatgeExamen2Castella')">%</td>
+        </tr>
+        <tr>
+            <td>
+                Examen3
+            </td>
+            <td>
+                <input type="number" id="notaExamen3Castella" onchange="guardarNumero('notaExamen3Castella')"></td>
+               
+            </td>
+            <td>
+                <input type="number"  id="percentatgeExamen3Castella"  onchange="guardarNumero('percentatgeExamen3Castella')">% </td>
+        </tr>
+        <tr>
+            <td>
+                Examen4
+            </td>
+            <td>
+                <input type="number" id="notaExamen4Castella" onchange="guardarNumero('notaExamen4Castella')"></td>
+               
+ </td>
+            <td>
+                <input type="number"  id="percentatgeExamen4Castella"  onchange="guardarNumero('percentatgeExamen4Castella')">%</td>
+        </tr>
+    </table>
+<script >
+    var TextAccesBooleana = localStorage.getItem("acces")
+var acces =  JSON.parse(TextAccesBooleana)
+if (acces){
+
+
+var notaMitjanaTreballsCastellaInput = document.getElementById("notaMitjanaTreballsCastella")
+var percentatgeTreballsCastellaInput = document.getElementById("percentatgeTreballsCastella")
+var percentatgeExamensCastellaInput = document.getElementById('percentatgeExamensCastella');
+var mitjanesExamensCastellaSpan = document.getElementById('mitjanesExamensCastella');
+var percentatgeAltresCastella = document.getElementById('percentatgeAltresCastella')
+var notaMitjanaAltresCastellaInput = document.getElementById('notaMitjanaAltresCastella')
+
+// Inputs d'examens Notes
+var notaExamen1CastellaInput = document.getElementById('notaExamen1Castella') 
+var notaExamen2CastellaInput = document.getElementById('notaExamen2Castella')
+var notaExamen3CastellaInput = document.getElementById('notaExamen3Castella')
+var notaExamen4CastellaInput = document.getElementById('notaExamen4Castella')
+var percentatgeExamen1CastellaInput = document.getElementById('percentatgeExamen1Castella')
+var percentatgeExamen2CastellaInput = document.getElementById('percentatgeExamen2Castella')
+var percentatgeExamen3CastellaInput = document.getElementById('percentatgeExamen3Castella')
+var percentatgeExamen4CastellaInput = document.getElementById('percentatgeExamen4Castella')
+// Cargar valores almacenados en localStorage al cargar la página
+cargarNumero('percentatgeExamensCastella');
+cargarNumero('percentatgeTreballsCastella');
+cargarNumero('percentatgeAltresCastella')
+cargarNumero('notaExamen1Castella')
+cargarNumero('notaExamen2Castella')
+cargarNumero('notaExamen3Castella')  
+cargarNumero('notaExamen4Castella')
+cargarNumero('percentatgeExamen1Castella')
+cargarNumero('percentatgeExamen2Castella')
+cargarNumero('percentatgeExamen3Castella')
+cargarNumero('percentatgeExamen4Castella')
+cargarNumero('notaMitjanaTreballsCastella')
+cargarNumero('notaMitjanaAltresCastella')
+calcularrestant();
+calcularnotafinal();
+calcularmitjanesExamensCastella()
+percentatgeExamensCastellaInput.addEventListener('input', function() {
+    calcularnotafinal();
+  calcularrestant();
+ 
+  calcularmitjanesExamensCastella();
+  guardarNumero('percentatgeExamensCastella');
+});
+
+percentatgeTreballsCastellaInput.addEventListener('input',function(){
+    calcularnotafinal();
+calcularrestant();
+
+calcularmitjanesExamensCastella();
+guardarNumero ('percentatgeTreballsCastella')
+})
+
+
+notaExamen1CastellaInput.addEventListener('input',function(){
+    calcularnotafinal()
+calcularrestant();
+guardarNumero('notaExamen1Castella')
+calcularmitjanesExamensCastella();
+})
+notaExamen2CastellaInput.addEventListener('input',function(){
+    calcularnotafinal()
+calcularrestant();
+guardarNumero('notaExamen2Castella')
+calcularmitjanesExamensCastella();
+})
+notaExamen3CastellaInput.addEventListener('input',function(){
+    calcularnotafinal()
+calcularrestant();
+guardarNumero('notaExamen3Castella')
+calcularmitjanesExamensCastella();
+})
+notaExamen4CastellaInput.addEventListener('input',function(){
+    calcularnotafinal()
+calcularrestant();
+guardarNumero('notaExamen4Castella')
+calcularmitjanesExamensCastella();
+})
+percentatgeExamen1CastellaInput.addEventListener('input',function(){
+calcularrestant();
+calcularnotafinal();
+guardarNumero('percentatgeExamen1Castella')
+calcularmitjanesExamensCastella();
+})
+percentatgeExamen2CastellaInput.addEventListener('input',function(){
+    calcularnotafinal()
+calcularrestant();
+guardarNumero('percentatgeExamen2Castella')
+calcularmitjanesExamensCastella();
+})
+percentatgeExamen3CastellaInput.addEventListener('input',function(){
+    calcularnotafinal()
+calcularrestant();
+guardarNumero('percentatgeExamen3Castella')
+calcularmitjanesExamensCastella();
+})
+percentatgeExamen4CastellaInput.addEventListener('input',function(){
+    calcularnotafinal()
+calcularrestant();
+guardarNumero('percentatgeExamen4Castella')
+calcularmitjanesExamensCastella();
+})
+
+notaMitjanaTreballsCastellaInput.addEventListener('input',function(){
+    calcularnotafinal()
+calcularrestant();
+guardarNumero('notaMitjanaTreballsCastellaInput')
+calcularmitjanesExamensCastella();
+})
+notaMitjanaAltresCastellaInput.addEventListener('input',function(){
+    calcularnotafinal()
+calcularrestant();
+guardarNumero('notaMitjanaAltresCastellaInput')
+calcularmitjanesExamensCastella();
+
+})
+function calcularnotafinal(){
+    var notaExamen1Castella = (parseFloat(notaExamen1CastellaInput.value))      
+var notaExamen2Castella = (parseFloat(notaExamen2CastellaInput.value))  
+var notaExamen3Castella = (parseFloat(notaExamen3CastellaInput.value))  
+var notaExamen4Castella = (parseFloat(notaExamen4CastellaInput.value))  
+var percentatgeExamen1Castella = (parseFloat(percentatgeExamen1CastellaInput.value)*0.01)  
+var percentatgeExamen2Castella = (parseFloat(percentatgeExamen2CastellaInput.value)*0.01)  
+var percentatgeExamen3Castella = (parseFloat(percentatgeExamen3CastellaInput.value)*0.01)  
+var percentatgeExamen4Castella = (parseFloat(percentatgeExamen4CastellaInput.value)*0.01)  
+
+if (isNaN(notaExamen1Castella)){
+notaExamen1Castella = 0;
+}
+if (isNaN(notaExamen2Castella)){
+notaExamen2Castella = 0;
+}
+if (isNaN(notaExamen3Castella)){
+notaExamen3Castella = 0;
+}
+if (isNaN(notaExamen4Castella)){
+notaExamen4Castella = 0;
+}
+if (isNaN(percentatgeExamen1Castella)){
+percentatgeExamen1Castella = 0;
+}
+if (isNaN(percentatgeExamen2Castella)){
+percentatgeExamen2Castella = 0;
+}
+if (isNaN(percentatgeExamen3Castella)){
+percentatgeExamen3Castella = 0;
+}
+if (isNaN(percentatgeExamen4Castella)){
+percentatgeExamen4Castella = 0;
+}
+
+mitjanesExamensCastellaSpan.textContent = ((notaExamen1Castella*percentatgeExamen1Castella)+(notaExamen2Castella*percentatgeExamen2Castella)+(notaExamen3Castella*percentatgeExamen3Castella)+(notaExamen4Castella*percentatgeExamen4Castella));
+
+
+var percentatgeExamensCastella = (parseFloat(percentatgeExamensCastellaInput.value))
+var notaMitjanaTreballsCastella  = (parseFloat(notaMitjanaTreballsCastellaInput.value))
+var notaMitjanaAltresCastella= (parseFloat(notaMitjanaAltresCastellaInput.value))
+var percentatgeTreballsCastella = (parseFloat(percentatgeTreballsCastellaInput.value))
+var mitjanesExamensCastellaNotaFinal = ((notaExamen1Castella*percentatgeExamen1Castella)+(notaExamen2Castella*percentatgeExamen2Castella)+(notaExamen3Castella*percentatgeExamen3Castella)+(notaExamen4Castella*percentatgeExamen4Castella))
+
+
+if (isNaN(mitjanesExamensCastellaNotaFinal)) {
+    mitjanesExamensCastellaNotaFinal = 0; 
+}
+
+if (isNaN(notaMitjanaTreballsCastella)) {
+    notaMitjanaTreballsCastella = 0; 
+}
+if (isNaN(notaMitjanaAltresCastella)) {
+    notaMitjanaAltresCastella = 0; 
+}
+
+if (isNaN(percentatgeTreballsCastella)) {
+percentatgeTreballsCastella = 0; 
+}
+
+if (isNaN(percentatgeExamensCastella)) {
+percentatgeExamensCastella = 0; 
+}
+    percentatgeAltresCastella1 = 100-(percentatgeExamensCastella+percentatgeTreballsCastella);
+
+
+
+    // Calcular la nota final
+   
+var notaFinal = (((mitjanesExamensCastellaNotaFinal)*((percentatgeExamensCastella)*0.01))+((notaMitjanaTreballsCastella)*((percentatgeTreballsCastella)*0.01))+((notaMitjanaAltresCastella)*((percentatgeAltresCastella1)*0.01)))
+if (isNaN(notaFinal)){
+    notaFinal = 0
+}
+
+    // Mostrar la nota final
+    document.getElementById("nota-final").textContent = "Nota Final: " + notaFinal.toFixed(2);
+}
+
+function calcularmitjanesExamensCastella(){
+var notaExamen1Castella = (parseFloat(notaExamen1CastellaInput.value))      
+var notaExamen2Castella = (parseFloat(notaExamen2CastellaInput.value))  
+var notaExamen3Castella = (parseFloat(notaExamen3CastellaInput.value))  
+var notaExamen4Castella = (parseFloat(notaExamen4CastellaInput.value))  
+var percentatgeExamen1Castella = (parseFloat(percentatgeExamen1CastellaInput.value)*0.01)  
+var percentatgeExamen2Castella = (parseFloat(percentatgeExamen2CastellaInput.value)*0.01)  
+var percentatgeExamen3Castella = (parseFloat(percentatgeExamen3CastellaInput.value)*0.01)  
+var percentatgeExamen4Castella = (parseFloat(percentatgeExamen4CastellaInput.value)*0.01)  
+
+if (isNaN(notaExamen1Castella)){
+notaExamen1Castella = 0;
+}
+if (isNaN(notaExamen2Castella)){
+notaExamen2Castella = 0;
+}
+if (isNaN(notaExamen3Castella)){
+notaExamen3Castella = 0;
+}
+if (isNaN(notaExamen4Castella)){
+notaExamen4Castella = 0;
+}
+if (isNaN(percentatgeExamen1Castella)){
+percentatgeExamen1Castella = 0;
+}
+if (isNaN(percentatgeExamen2Castella)){
+percentatgeExamen2Castella = 0;
+}
+if (isNaN(percentatgeExamen3Castella)){
+percentatgeExamen3Castella = 0;
+}
+if (isNaN(percentatgeExamen4Castella)){
+percentatgeExamen4Castella = 0;
+}
+
+mitjanesExamensCastellaSpan.textContent = ((notaExamen1Castella*percentatgeExamen1Castella)+(notaExamen2Castella*percentatgeExamen2Castella)+(notaExamen3Castella*percentatgeExamen3Castella)+(notaExamen4Castella*percentatgeExamen4Castella));
+
+}
+
+
+function calcularrestant(){
+var percentatgeExamensCastella = parseFloat(percentatgeExamensCastellaInput.value)
+var percentatgeTreballsCastella = parseFloat(percentatgeTreballsCastellaInput.value)
+if (isNaN(percentatgeTreballsCastella)) {
+percentatgeTreballsCastella = 0; 
+}
+
+if (isNaN(percentatgeExamensCastella)) {
+percentatgeExamensCastella = 0; 
+}
+    percentatgeAltresCastella.textContent = (100-(percentatgeExamensCastella+percentatgeTreballsCastella)+"%");
+}  
+
+
+function guardarNumero(id) {
+  var input = document.getElementById(id);
+  var valor = input.value;
+  localStorage.setItem(id, valor);
+}
+
+function cargarNumero(id) {
+  var valor = localStorage.getItem(id);
+  if (valor !== null) {
+      document.getElementById(id).value = valor;
+  }
+}
+
+function enrere() {
+  window.location.href = "mitjananotes.html";
+}
+
+
+}else{
+
+window.location.href="404.html"
+}
+   
+document.oncontextmenu = function () {
+  alert("Per motius de seguretat algunes funcions no estàn permeses");
+  return false;
+};
+
+document.onkeydown = function (e) {
+  if (e.keyCode == 123) {
+
+    return false;
+  }
+
+  if (e.ctrlKey && e.shiftKey && e.keyCode === 73) {
+
+    return false;
+  }
+  if (e.ctrlKey && e.keyCode == 85){
+
+    return false;
+  }
+};
+
+
+document.onmousedown = function (e) {
+  if (e.button === 2) {
+
+    return false;
+  }
+};
+
+
+</script>
+  
+</body>
+</html>

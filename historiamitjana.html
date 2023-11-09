@@ -1,0 +1,462 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calcular Mitjana - Història</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f3f3f3;
+            text-align: center;
+        }
+
+        h1 {
+            background-color: #696c6d;
+            color: #fff;
+            padding: 20px;
+            margin: 0;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 50%;
+            margin: 20px auto;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            text-align: center;
+            padding: 12px;
+        }
+
+        th {
+            background-color: #394248;
+            color: #fff;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+
+        #resultado {
+            font-weight: bold;
+        }
+
+        #enrere-button {
+            float: left;
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+        }
+        #nota-final {
+font-size: 0.8em; /* Reducir el tamaño de la fuente */
+color: #ffffff;     /* Cambiar el color del texto a un tono más tenue */
+margin-left: 60px; /* Agregar un pequeño margen izquierdo para separar del título principal */
+}
+input[type="number"] {
+        width:75px; /* Ajusta el ancho según tus preferencias */
+        padding: 8px;
+        box-sizing: border-box;
+    }
+
+    </style>
+</head>
+<body>
+    <button id="enrere-button" onclick="enrere()">Enrere</button>
+    <h1>Calcular Mitjana - Història <span id="nota-final"></span></h1>
+
+    <h3>Criteris</h3>
+    <table>
+        <tr>
+            <th>Nom</th>
+            <th>Mitjana</th>
+            <th>Percentatge de la nota total</th>
+           
+         
+        </tr>
+        <tr>
+            <td>Exàmens</td>
+            <td><span id="mitjanesExamensHistoria"></span></td>
+            <td><input type="number" id="percentatgeExamensHistoria" onchange="guardarNumero('percentatgeExamensHistoria')">%</td>
+        </tr>
+        <tr>
+            <td>Treballs</td>
+            <td><input type="number"  id="notaMitjanaTreballsHistoria" onchange="guardarNumero('notaMitjanaTreballsHistoria')"></td>
+            <td><input type="number" id="percentatgeTreballsHistoria" onchange="guardarNumero('percentatgeTreballsHistoria')">%</td>
+        </tr>
+        <tr>
+            <td>Altres</td>
+            <td><input type="number"  id="notaMitjanaAltresHistoria" onchange="guardarNumero('notaMitjanaAltresHistoria')"></td>
+            <td><span id = "percentatgeAltresHistoria"></span></td>
+        </tr>
+    </table>
+    <h3>Examens</h3>
+    <table>
+        <tr>
+            <th>Nom Exàmen</th>
+            <th>Nota</th>
+            <th>Percentatge </th>
+        </tr>
+
+        <tr>
+            <td>
+                Examen1
+            </td>
+            <td>
+                <input type="number" id="notaExamen1Historia" onchange="guardarNumero('notaExamen1Historia')">
+               
+            </td>
+            <td>
+                <input type="number"  id="percentatgeExamen1Historia" onchange="guardarNumero('percentatgeExamen1Historia')">% </td>
+        </tr>
+        <tr>
+            <td>
+                Examen2
+            </td>
+            <td>
+                <input type="number" id="notaExamen2Historia" onchange="guardarNumero('notaExamen2Historia')"></td>
+               
+            </td>
+            <td>
+                <input type="number"  id="percentatgeExamen2Historia"onchange="guardarNumero('percentatgeExamen2Historia')">%</td>
+        </tr>
+        <tr>
+            <td>
+                Examen3
+            </td>
+            <td>
+                <input type="number" id="notaExamen3Historia" onchange="guardarNumero('notaExamen3Historia')"></td>
+               
+            </td>
+            <td>
+                <input type="number"  id="percentatgeExamen3Historia"  onchange="guardarNumero('percentatgeExamen3Historia')">% </td>
+        </tr>
+        <tr>
+            <td>
+                Examen4
+            </td>
+            <td>
+                <input type="number" id="notaExamen4Historia" onchange="guardarNumero('notaExamen4Historia')"></td>
+               
+ </td>
+            <td>
+                <input type="number"  id="percentatgeExamen4Historia"  onchange="guardarNumero('percentatgeExamen4Historia')">%</td>
+        </tr>
+    </table>
+<script >
+    var TextAccesBooleana = localStorage.getItem("acces")
+var acces =  JSON.parse(TextAccesBooleana)
+if (acces){
+
+
+var notaMitjanaTreballsHistoriaInput = document.getElementById("notaMitjanaTreballsHistoria")
+var percentatgeTreballsHistoriaInput = document.getElementById("percentatgeTreballsHistoria")
+var percentatgeExamensHistoriaInput = document.getElementById('percentatgeExamensHistoria');
+var mitjanesExamensHistoriaSpan = document.getElementById('mitjanesExamensHistoria');
+var percentatgeAltresHistoria = document.getElementById('percentatgeAltresHistoria')
+var notaMitjanaAltresHistoriaInput = document.getElementById('notaMitjanaAltresHistoria')
+
+// Inputs d'examens Notes
+var notaExamen1HistoriaInput = document.getElementById('notaExamen1Historia') 
+var notaExamen2HistoriaInput = document.getElementById('notaExamen2Historia')
+var notaExamen3HistoriaInput = document.getElementById('notaExamen3Historia')
+var notaExamen4HistoriaInput = document.getElementById('notaExamen4Historia')
+var percentatgeExamen1HistoriaInput = document.getElementById('percentatgeExamen1Historia')
+var percentatgeExamen2HistoriaInput = document.getElementById('percentatgeExamen2Historia')
+var percentatgeExamen3HistoriaInput = document.getElementById('percentatgeExamen3Historia')
+var percentatgeExamen4HistoriaInput = document.getElementById('percentatgeExamen4Historia')
+// Cargar valores almacenados en localStorage al cargar la página
+cargarNumero('percentatgeExamensHistoria');
+cargarNumero('percentatgeTreballsHistoria');
+cargarNumero('percentatgeAltresHistoria')
+cargarNumero('notaExamen1Historia')
+cargarNumero('notaExamen2Historia')
+cargarNumero('notaExamen3Historia')  
+cargarNumero('notaExamen4Historia')
+cargarNumero('percentatgeExamen1Historia')
+cargarNumero('percentatgeExamen2Historia')
+cargarNumero('percentatgeExamen3Historia')
+cargarNumero('percentatgeExamen4Historia')
+cargarNumero('notaMitjanaTreballsHistoria')
+cargarNumero('notaMitjanaAltresHistoria')
+calcularrestant();
+calcularnotafinal();
+calcularmitjanesExamensHistoria()
+percentatgeExamensHistoriaInput.addEventListener('input', function() {
+    calcularnotafinal();
+  calcularrestant();
+ 
+  calcularmitjanesExamensHistoria();
+  guardarNumero('percentatgeExamensHistoria');
+});
+
+percentatgeTreballsHistoriaInput.addEventListener('input',function(){
+    calcularnotafinal();
+calcularrestant();
+
+calcularmitjanesExamensHistoria();
+guardarNumero ('percentatgeTreballsHistoria')
+})
+
+
+notaExamen1HistoriaInput.addEventListener('input',function(){
+    calcularnotafinal()
+calcularrestant();
+guardarNumero('notaExamen1Historia')
+calcularmitjanesExamensHistoria();
+})
+notaExamen2HistoriaInput.addEventListener('input',function(){
+    calcularnotafinal()
+calcularrestant();
+guardarNumero('notaExamen2Historia')
+calcularmitjanesExamensHistoria();
+})
+notaExamen3HistoriaInput.addEventListener('input',function(){
+    calcularnotafinal()
+calcularrestant();
+guardarNumero('notaExamen3Historia')
+calcularmitjanesExamensHistoria();
+})
+notaExamen4HistoriaInput.addEventListener('input',function(){
+    calcularnotafinal()
+calcularrestant();
+guardarNumero('notaExamen4Historia')
+calcularmitjanesExamensHistoria();
+})
+percentatgeExamen1HistoriaInput.addEventListener('input',function(){
+calcularrestant();
+calcularnotafinal();
+guardarNumero('percentatgeExamen1Historia')
+calcularmitjanesExamensHistoria();
+})
+percentatgeExamen2HistoriaInput.addEventListener('input',function(){
+    calcularnotafinal()
+calcularrestant();
+guardarNumero('percentatgeExamen2Historia')
+calcularmitjanesExamensHistoria();
+})
+percentatgeExamen3HistoriaInput.addEventListener('input',function(){
+    calcularnotafinal()
+calcularrestant();
+guardarNumero('percentatgeExamen3Historia')
+calcularmitjanesExamensHistoria();
+})
+percentatgeExamen4HistoriaInput.addEventListener('input',function(){
+    calcularnotafinal()
+calcularrestant();
+guardarNumero('percentatgeExamen4Historia')
+calcularmitjanesExamensHistoria();
+})
+
+notaMitjanaTreballsHistoriaInput.addEventListener('input',function(){
+    calcularnotafinal()
+calcularrestant();
+guardarNumero('notaMitjanaTreballsHistoriaInput')
+calcularmitjanesExamensHistoria();
+})
+notaMitjanaAltresHistoriaInput.addEventListener('input',function(){
+    calcularnotafinal()
+calcularrestant();
+guardarNumero('notaMitjanaAltresHistoriaInput')
+calcularmitjanesExamensHistoria();
+
+})
+function calcularnotafinal(){
+    var notaExamen1Historia = (parseFloat(notaExamen1HistoriaInput.value))      
+var notaExamen2Historia = (parseFloat(notaExamen2HistoriaInput.value))  
+var notaExamen3Historia = (parseFloat(notaExamen3HistoriaInput.value))  
+var notaExamen4Historia = (parseFloat(notaExamen4HistoriaInput.value))  
+var percentatgeExamen1Historia = (parseFloat(percentatgeExamen1HistoriaInput.value)*0.01)  
+var percentatgeExamen2Historia = (parseFloat(percentatgeExamen2HistoriaInput.value)*0.01)  
+var percentatgeExamen3Historia = (parseFloat(percentatgeExamen3HistoriaInput.value)*0.01)  
+var percentatgeExamen4Historia = (parseFloat(percentatgeExamen4HistoriaInput.value)*0.01)  
+
+if (isNaN(notaExamen1Historia)){
+notaExamen1Historia = 0;
+}
+if (isNaN(notaExamen2Historia)){
+notaExamen2Historia = 0;
+}
+if (isNaN(notaExamen3Historia)){
+notaExamen3Historia = 0;
+}
+if (isNaN(notaExamen4Historia)){
+notaExamen4Historia = 0;
+}
+if (isNaN(percentatgeExamen1Historia)){
+percentatgeExamen1Historia = 0;
+}
+if (isNaN(percentatgeExamen2Historia)){
+percentatgeExamen2Historia = 0;
+}
+if (isNaN(percentatgeExamen3Historia)){
+percentatgeExamen3Historia = 0;
+}
+if (isNaN(percentatgeExamen4Historia)){
+percentatgeExamen4Historia = 0;
+}
+
+mitjanesExamensHistoriaSpan.textContent = ((notaExamen1Historia*percentatgeExamen1Historia)+(notaExamen2Historia*percentatgeExamen2Historia)+(notaExamen3Historia*percentatgeExamen3Historia)+(notaExamen4Historia*percentatgeExamen4Historia));
+
+
+var percentatgeExamensHistoria = (parseFloat(percentatgeExamensHistoriaInput.value))
+var notaMitjanaTreballsHistoria  = (parseFloat(notaMitjanaTreballsHistoriaInput.value))
+var notaMitjanaAltresHistoria= (parseFloat(notaMitjanaAltresHistoriaInput.value))
+var percentatgeTreballsHistoria = (parseFloat(percentatgeTreballsHistoriaInput.value))
+var mitjanesExamensHistoriaNotaFinal = ((notaExamen1Historia*percentatgeExamen1Historia)+(notaExamen2Historia*percentatgeExamen2Historia)+(notaExamen3Historia*percentatgeExamen3Historia)+(notaExamen4Historia*percentatgeExamen4Historia))
+
+
+if (isNaN(mitjanesExamensHistoriaNotaFinal)) {
+    mitjanesExamensHistoriaNotaFinal = 0; 
+}
+
+if (isNaN(notaMitjanaTreballsHistoria)) {
+    notaMitjanaTreballsHistoria = 0; 
+}
+if (isNaN(notaMitjanaAltresHistoria)) {
+    notaMitjanaAltresHistoria = 0; 
+}
+
+if (isNaN(percentatgeTreballsHistoria)) {
+percentatgeTreballsHistoria = 0; 
+}
+
+if (isNaN(percentatgeExamensHistoria)) {
+percentatgeExamensHistoria = 0; 
+}
+    percentatgeAltresHistoria1 = 100-(percentatgeExamensHistoria+percentatgeTreballsHistoria);
+
+
+
+    // Calcular la nota final
+   
+var notaFinal = (((mitjanesExamensHistoriaNotaFinal)*((percentatgeExamensHistoria)*0.01))+((notaMitjanaTreballsHistoria)*((percentatgeTreballsHistoria)*0.01))+((notaMitjanaAltresHistoria)*((percentatgeAltresHistoria1)*0.01)))
+if (isNaN(notaFinal)){
+    notaFinal = 0
+}
+
+    // Mostrar la nota final
+    document.getElementById("nota-final").textContent = "Nota Final: " + notaFinal.toFixed(2);
+}
+
+function calcularmitjanesExamensHistoria(){
+var notaExamen1Historia = (parseFloat(notaExamen1HistoriaInput.value))      
+var notaExamen2Historia = (parseFloat(notaExamen2HistoriaInput.value))  
+var notaExamen3Historia = (parseFloat(notaExamen3HistoriaInput.value))  
+var notaExamen4Historia = (parseFloat(notaExamen4HistoriaInput.value))  
+var percentatgeExamen1Historia = (parseFloat(percentatgeExamen1HistoriaInput.value)*0.01)  
+var percentatgeExamen2Historia = (parseFloat(percentatgeExamen2HistoriaInput.value)*0.01)  
+var percentatgeExamen3Historia = (parseFloat(percentatgeExamen3HistoriaInput.value)*0.01)  
+var percentatgeExamen4Historia = (parseFloat(percentatgeExamen4HistoriaInput.value)*0.01)  
+
+if (isNaN(notaExamen1Historia)){
+notaExamen1Historia = 0;
+}
+if (isNaN(notaExamen2Historia)){
+notaExamen2Historia = 0;
+}
+if (isNaN(notaExamen3Historia)){
+notaExamen3Historia = 0;
+}
+if (isNaN(notaExamen4Historia)){
+notaExamen4Historia = 0;
+}
+if (isNaN(percentatgeExamen1Historia)){
+percentatgeExamen1Historia = 0;
+}
+if (isNaN(percentatgeExamen2Historia)){
+percentatgeExamen2Historia = 0;
+}
+if (isNaN(percentatgeExamen3Historia)){
+percentatgeExamen3Historia = 0;
+}
+if (isNaN(percentatgeExamen4Historia)){
+percentatgeExamen4Historia = 0;
+}
+
+mitjanesExamensHistoriaSpan.textContent = ((notaExamen1Historia*percentatgeExamen1Historia)+(notaExamen2Historia*percentatgeExamen2Historia)+(notaExamen3Historia*percentatgeExamen3Historia)+(notaExamen4Historia*percentatgeExamen4Historia));
+
+}
+
+
+function calcularrestant(){
+var percentatgeExamensHistoria = parseFloat(percentatgeExamensHistoriaInput.value)
+var percentatgeTreballsHistoria = parseFloat(percentatgeTreballsHistoriaInput.value)
+if (isNaN(percentatgeTreballsHistoria)) {
+percentatgeTreballsHistoria = 0; 
+}
+
+if (isNaN(percentatgeExamensHistoria)) {
+percentatgeExamensHistoria = 0; 
+}
+    percentatgeAltresHistoria.textContent = (100-(percentatgeExamensHistoria+percentatgeTreballsHistoria)+"%");
+}  
+
+
+function guardarNumero(id) {
+  var input = document.getElementById(id);
+  var valor = input.value;
+  localStorage.setItem(id, valor);
+}
+
+function cargarNumero(id) {
+  var valor = localStorage.getItem(id);
+  if (valor !== null) {
+      document.getElementById(id).value = valor;
+  }
+}
+
+function enrere() {
+  window.location.href = "mitjananotes.html";
+}
+
+
+}else{
+
+window.location.href="404.html"
+}
+   
+document.oncontextmenu = function () {
+  
+  return false;
+};
+
+document.onkeydown = function (e) {
+  if (e.keyCode == 123) {
+    
+    return false;
+  }
+
+  if (e.ctrlKey && e.shiftKey && e.keyCode === 73) {
+    
+    return false;
+  }
+  if (e.ctrlKey && e.keyCode == 85){
+    
+    return false;
+  }
+};
+
+
+document.onmousedown = function (e) {
+  if (e.button === 2) {
+    
+    return false;
+  }
+};
+
+
+</script>
+  
+</body>
+</html>

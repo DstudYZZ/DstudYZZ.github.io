@@ -1,0 +1,462 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calcular Mitjana - Català</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f3f3f3;
+            text-align: center;
+        }
+
+        h1 {
+            background-color: #696c6d;
+            color: #fff;
+            padding: 20px;
+            margin: 0;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 50%;
+            margin: 20px auto;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            text-align: center;
+            padding: 12px;
+        }
+
+        th {
+            background-color: #394248;
+            color: #fff;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+
+        #resultado {
+            font-weight: bold;
+        }
+
+        #enrere-button {
+            float: left;
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+        }
+        #nota-final {
+font-size: 0.8em; /* Reducir el tamaño de la fuente */
+color: #ffffff;     /* Cambiar el color del texto a un tono más tenue */
+margin-left: 60px; /* Agregar un pequeño margen izquierdo para separar del título principal */
+}
+input[type="number"] {
+        width:75px; /* Ajusta el ancho según tus preferencias */
+        padding: 8px;
+        box-sizing: border-box;
+    }
+
+    </style>
+</head>
+<body>
+    <button id="enrere-button" onclick="enrere()">Enrere</button>
+    <h1>Calcular Mitjana - Català <span id="nota-final"></span></h1>
+
+    <h3>Criteris</h3>
+    <table>
+        <tr>
+            <th>Nom</th>
+            <th>Mitjana</th>
+            <th>Percentatge de la nota total</th>
+           
+         
+        </tr>
+        <tr>
+            <td>Exàmens</td>
+            <td><span id="mitjanesExamensCatala"></span></td>
+            <td><input type="number" id="percentatgeExamensCatala" onchange="guardarNumero('percentatgeExamensCatala')">%</td>
+        </tr>
+        <tr>
+            <td>Treballs</td>
+            <td><input type="number"  id="notaMitjanaTreballsCatala" onchange="guardarNumero('notaMitjanaTreballsCatala')"></td>
+            <td><input type="number" id="percentatgeTreballsCatala" onchange="guardarNumero('percentatgeTreballsCatala')">%</td>
+        </tr>
+        <tr>
+            <td>Altres</td>
+            <td><input type="number"  id="notaMitjanaAltresCatala" onchange="guardarNumero('notaMitjanaAltresCatala')"></td>
+            <td><span id = "percentatgeAltresCatala"></span></td>
+        </tr>
+    </table>
+    <h3>Examens</h3>
+    <table>
+        <tr>
+            <th>Nom Exàmen</th>
+            <th>Nota</th>
+            <th>Percentatge </th>
+        </tr>
+
+        <tr>
+            <td>
+                Examen1
+            </td>
+            <td>
+                <input type="number" id="notaExamen1Catala" onchange="guardarNumero('notaExamen1Catala')">
+               
+            </td>
+            <td>
+                <input type="number"  id="percentatgeExamen1Catala" onchange="guardarNumero('percentatgeExamen1Catala')">% </td>
+        </tr>
+        <tr>
+            <td>
+                Examen2
+            </td>
+            <td>
+                <input type="number" id="notaExamen2Catala" onchange="guardarNumero('notaExamen2Catala')"></td>
+               
+            </td>
+            <td>
+                <input type="number"  id="percentatgeExamen2Catala"onchange="guardarNumero('percentatgeExamen2Catala')">%</td>
+        </tr>
+        <tr>
+            <td>
+                Examen3
+            </td>
+            <td>
+                <input type="number" id="notaExamen3Catala" onchange="guardarNumero('notaExamen3Catala')"></td>
+               
+            </td>
+            <td>
+                <input type="number"  id="percentatgeExamen3Catala"  onchange="guardarNumero('percentatgeExamen3Catala')">% </td>
+        </tr>
+        <tr>
+            <td>
+                Examen4
+            </td>
+            <td>
+                <input type="number" id="notaExamen4Catala" onchange="guardarNumero('notaExamen4Catala')"></td>
+               
+ </td>
+            <td>
+                <input type="number"  id="percentatgeExamen4Catala"  onchange="guardarNumero('percentatgeExamen4Catala')">%</td>
+        </tr>
+    </table>
+<script >
+    var TextAccesBooleana = localStorage.getItem("acces")
+var acces =  JSON.parse(TextAccesBooleana)
+if (acces){
+
+
+var notaMitjanaTreballsCatalaInput = document.getElementById("notaMitjanaTreballsCatala")
+var percentatgeTreballsCatalaInput = document.getElementById("percentatgeTreballsCatala")
+var percentatgeExamensCatalaInput = document.getElementById('percentatgeExamensCatala');
+var mitjanesExamensCatalaSpan = document.getElementById('mitjanesExamensCatala');
+var percentatgeAltresCatala = document.getElementById('percentatgeAltresCatala')
+var notaMitjanaAltresCatalaInput = document.getElementById('notaMitjanaAltresCatala')
+
+// Inputs d'examens Notes
+var notaExamen1CatalaInput = document.getElementById('notaExamen1Catala') 
+var notaExamen2CatalaInput = document.getElementById('notaExamen2Catala')
+var notaExamen3CatalaInput = document.getElementById('notaExamen3Catala')
+var notaExamen4CatalaInput = document.getElementById('notaExamen4Catala')
+var percentatgeExamen1CatalaInput = document.getElementById('percentatgeExamen1Catala')
+var percentatgeExamen2CatalaInput = document.getElementById('percentatgeExamen2Catala')
+var percentatgeExamen3CatalaInput = document.getElementById('percentatgeExamen3Catala')
+var percentatgeExamen4CatalaInput = document.getElementById('percentatgeExamen4Catala')
+// Cargar valores almacenados en localStorage al cargar la página
+cargarNumero('percentatgeExamensCatala');
+cargarNumero('percentatgeTreballsCatala');
+cargarNumero('percentatgeAltresCatala')
+cargarNumero('notaExamen1Catala')
+cargarNumero('notaExamen2Catala')
+cargarNumero('notaExamen3Catala')  
+cargarNumero('notaExamen4Catala')
+cargarNumero('percentatgeExamen1Catala')
+cargarNumero('percentatgeExamen2Catala')
+cargarNumero('percentatgeExamen3Catala')
+cargarNumero('percentatgeExamen4Catala')
+cargarNumero('notaMitjanaTreballsCatala')
+cargarNumero('notaMitjanaAltresCatala')
+calcularrestant();
+calcularnotafinal();
+calcularmitjanesExamensCatala()
+percentatgeExamensCatalaInput.addEventListener('input', function() {
+    calcularnotafinal();
+  calcularrestant();
+ 
+  calcularmitjanesExamensCatala();
+  guardarNumero('percentatgeExamensCatala');
+});
+
+percentatgeTreballsCatalaInput.addEventListener('input',function(){
+    calcularnotafinal();
+calcularrestant();
+
+calcularmitjanesExamensCatala();
+guardarNumero ('percentatgeTreballsCatala')
+})
+
+
+notaExamen1CatalaInput.addEventListener('input',function(){
+    calcularnotafinal()
+calcularrestant();
+guardarNumero('notaExamen1Catala')
+calcularmitjanesExamensCatala();
+})
+notaExamen2CatalaInput.addEventListener('input',function(){
+    calcularnotafinal()
+calcularrestant();
+guardarNumero('notaExamen2Catala')
+calcularmitjanesExamensCatala();
+})
+notaExamen3CatalaInput.addEventListener('input',function(){
+    calcularnotafinal()
+calcularrestant();
+guardarNumero('notaExamen3Catala')
+calcularmitjanesExamensCatala();
+})
+notaExamen4CatalaInput.addEventListener('input',function(){
+    calcularnotafinal()
+calcularrestant();
+guardarNumero('notaExamen4Catala')
+calcularmitjanesExamensCatala();
+})
+percentatgeExamen1CatalaInput.addEventListener('input',function(){
+calcularrestant();
+calcularnotafinal();
+guardarNumero('percentatgeExamen1Catala')
+calcularmitjanesExamensCatala();
+})
+percentatgeExamen2CatalaInput.addEventListener('input',function(){
+    calcularnotafinal()
+calcularrestant();
+guardarNumero('percentatgeExamen2Catala')
+calcularmitjanesExamensCatala();
+})
+percentatgeExamen3CatalaInput.addEventListener('input',function(){
+    calcularnotafinal()
+calcularrestant();
+guardarNumero('percentatgeExamen3Catala')
+calcularmitjanesExamensCatala();
+})
+percentatgeExamen4CatalaInput.addEventListener('input',function(){
+    calcularnotafinal()
+calcularrestant();
+guardarNumero('percentatgeExamen4Catala')
+calcularmitjanesExamensCatala();
+})
+
+notaMitjanaTreballsCatalaInput.addEventListener('input',function(){
+    calcularnotafinal()
+calcularrestant();
+guardarNumero('notaMitjanaTreballsCatalaInput')
+calcularmitjanesExamensCatala();
+})
+notaMitjanaAltresCatalaInput.addEventListener('input',function(){
+    calcularnotafinal()
+calcularrestant();
+guardarNumero('notaMitjanaAltresCatalaInput')
+calcularmitjanesExamensCatala();
+
+})
+function calcularnotafinal(){
+    var notaExamen1Catala = (parseFloat(notaExamen1CatalaInput.value))      
+var notaExamen2Catala = (parseFloat(notaExamen2CatalaInput.value))  
+var notaExamen3Catala = (parseFloat(notaExamen3CatalaInput.value))  
+var notaExamen4Catala = (parseFloat(notaExamen4CatalaInput.value))  
+var percentatgeExamen1Catala = (parseFloat(percentatgeExamen1CatalaInput.value)*0.01)  
+var percentatgeExamen2Catala = (parseFloat(percentatgeExamen2CatalaInput.value)*0.01)  
+var percentatgeExamen3Catala = (parseFloat(percentatgeExamen3CatalaInput.value)*0.01)  
+var percentatgeExamen4Catala = (parseFloat(percentatgeExamen4CatalaInput.value)*0.01)  
+
+if (isNaN(notaExamen1Catala)){
+notaExamen1Catala = 0;
+}
+if (isNaN(notaExamen2Catala)){
+notaExamen2Catala = 0;
+}
+if (isNaN(notaExamen3Catala)){
+notaExamen3Catala = 0;
+}
+if (isNaN(notaExamen4Catala)){
+notaExamen4Catala = 0;
+}
+if (isNaN(percentatgeExamen1Catala)){
+percentatgeExamen1Catala = 0;
+}
+if (isNaN(percentatgeExamen2Catala)){
+percentatgeExamen2Catala = 0;
+}
+if (isNaN(percentatgeExamen3Catala)){
+percentatgeExamen3Catala = 0;
+}
+if (isNaN(percentatgeExamen4Catala)){
+percentatgeExamen4Catala = 0;
+}
+
+mitjanesExamensCatalaSpan.textContent = ((notaExamen1Catala*percentatgeExamen1Catala)+(notaExamen2Catala*percentatgeExamen2Catala)+(notaExamen3Catala*percentatgeExamen3Catala)+(notaExamen4Catala*percentatgeExamen4Catala));
+
+
+var percentatgeExamensCatala = (parseFloat(percentatgeExamensCatalaInput.value))
+var notaMitjanaTreballsCatala  = (parseFloat(notaMitjanaTreballsCatalaInput.value))
+var notaMitjanaAltresCatala= (parseFloat(notaMitjanaAltresCatalaInput.value))
+var percentatgeTreballsCatala = (parseFloat(percentatgeTreballsCatalaInput.value))
+var mitjanesExamensCatalaNotaFinal = ((notaExamen1Catala*percentatgeExamen1Catala)+(notaExamen2Catala*percentatgeExamen2Catala)+(notaExamen3Catala*percentatgeExamen3Catala)+(notaExamen4Catala*percentatgeExamen4Catala))
+
+
+if (isNaN(mitjanesExamensCatalaNotaFinal)) {
+    mitjanesExamensCatalaNotaFinal = 0; 
+}
+
+if (isNaN(notaMitjanaTreballsCatala)) {
+    notaMitjanaTreballsCatala = 0; 
+}
+if (isNaN(notaMitjanaAltresCatala)) {
+    notaMitjanaAltresCatala = 0; 
+}
+
+if (isNaN(percentatgeTreballsCatala)) {
+percentatgeTreballsCatala = 0; 
+}
+
+if (isNaN(percentatgeExamensCatala)) {
+percentatgeExamensCatala = 0; 
+}
+    percentatgeAltresCatala1 = 100-(percentatgeExamensCatala+percentatgeTreballsCatala);
+
+
+
+    // Calcular la nota final
+   
+var notaFinal = (((mitjanesExamensCatalaNotaFinal)*((percentatgeExamensCatala)*0.01))+((notaMitjanaTreballsCatala)*((percentatgeTreballsCatala)*0.01))+((notaMitjanaAltresCatala)*((percentatgeAltresCatala1)*0.01)))
+if (isNaN(notaFinal)){
+    notaFinal = 0
+}
+
+    // Mostrar la nota final
+    document.getElementById("nota-final").textContent = "Nota Final: " + notaFinal.toFixed(2);
+}
+
+function calcularmitjanesExamensCatala(){
+var notaExamen1Catala = (parseFloat(notaExamen1CatalaInput.value))      
+var notaExamen2Catala = (parseFloat(notaExamen2CatalaInput.value))  
+var notaExamen3Catala = (parseFloat(notaExamen3CatalaInput.value))  
+var notaExamen4Catala = (parseFloat(notaExamen4CatalaInput.value))  
+var percentatgeExamen1Catala = (parseFloat(percentatgeExamen1CatalaInput.value)*0.01)  
+var percentatgeExamen2Catala = (parseFloat(percentatgeExamen2CatalaInput.value)*0.01)  
+var percentatgeExamen3Catala = (parseFloat(percentatgeExamen3CatalaInput.value)*0.01)  
+var percentatgeExamen4Catala = (parseFloat(percentatgeExamen4CatalaInput.value)*0.01)  
+
+if (isNaN(notaExamen1Catala)){
+notaExamen1Catala = 0;
+}
+if (isNaN(notaExamen2Catala)){
+notaExamen2Catala = 0;
+}
+if (isNaN(notaExamen3Catala)){
+notaExamen3Catala = 0;
+}
+if (isNaN(notaExamen4Catala)){
+notaExamen4Catala = 0;
+}
+if (isNaN(percentatgeExamen1Catala)){
+percentatgeExamen1Catala = 0;
+}
+if (isNaN(percentatgeExamen2Catala)){
+percentatgeExamen2Catala = 0;
+}
+if (isNaN(percentatgeExamen3Catala)){
+percentatgeExamen3Catala = 0;
+}
+if (isNaN(percentatgeExamen4Catala)){
+percentatgeExamen4Catala = 0;
+}
+
+mitjanesExamensCatalaSpan.textContent = ((notaExamen1Catala*percentatgeExamen1Catala)+(notaExamen2Catala*percentatgeExamen2Catala)+(notaExamen3Catala*percentatgeExamen3Catala)+(notaExamen4Catala*percentatgeExamen4Catala));
+
+}
+
+
+function calcularrestant(){
+var percentatgeExamensCatala = parseFloat(percentatgeExamensCatalaInput.value)
+var percentatgeTreballsCatala = parseFloat(percentatgeTreballsCatalaInput.value)
+if (isNaN(percentatgeTreballsCatala)) {
+percentatgeTreballsCatala = 0; 
+}
+
+if (isNaN(percentatgeExamensCatala)) {
+percentatgeExamensCatala = 0; 
+}
+    percentatgeAltresCatala.textContent = (100-(percentatgeExamensCatala+percentatgeTreballsCatala)+"%");
+}  
+
+
+function guardarNumero(id) {
+  var input = document.getElementById(id);
+  var valor = input.value;
+  localStorage.setItem(id, valor);
+}
+
+function cargarNumero(id) {
+  var valor = localStorage.getItem(id);
+  if (valor !== null) {
+      document.getElementById(id).value = valor;
+  }
+}
+
+function enrere() {
+  window.location.href = "mitjananotes.html";
+}
+
+
+}else{
+
+window.location.href="404.html"
+}
+   
+document.oncontextmenu = function () {
+  
+  return false;
+};
+
+document.onkeydown = function (e) {
+  if (e.keyCode == 123) {
+    
+    return false;
+  }
+
+  if (e.ctrlKey && e.shiftKey && e.keyCode === 73) {
+    
+    return false;
+  }
+  if (e.ctrlKey && e.keyCode == 85){
+    
+    return false;
+  }
+};
+
+
+document.onmousedown = function (e) {
+  if (e.button === 2) {
+    
+    return false;
+  }
+};
+
+
+</script>
+  
+</body>
+</html>

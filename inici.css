@@ -1,0 +1,73 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: rgb(157, 214, 214);
+}
+
+
+.sidebar {
+    height: 100%;
+    width: 250px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #524f81;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+.sidebar a {
+    padding: 15px 25px;
+    text-decoration: none;
+    font-size: 18px;
+    color: white;
+    display: block;
+    
+    
+}
+
+.sidebar a:hover {
+    background-color: #2b206c;
+}
+#tancarsessio{
+    background-color: darkslategray; 
+    padding: 15px 25 px; 
+ 
+    display: block;
+}
+.openbtn {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.closebtn {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+
+
+#main {
+   margin-left: 250px;
+    padding: 16px;
+}
+
+#main #titulo {
+    margin-left: 40px; /* Añadir margen izquierdo para el ícono de menú */
+    background: transparent; /* Fondo transparente para el título */
+    display: inline-block;
+    vertical-align: middle; /* Alinear verticalmente el título y el ícono de menú */
+}
+.icono-configuracion {
+  
+    width: 20px; /* Define el ancho deseado, por ejemplo, 20px */
+}

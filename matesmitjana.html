@@ -1,0 +1,462 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calcular Mitjana - Matemàtiques</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f3f3f3;
+            text-align: center;
+        }
+
+        h1 {
+            background-color: #696c6d;
+            color: #fff;
+            padding: 20px;
+            margin: 0;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 50%;
+            margin: 20px auto;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            text-align: center;
+            padding: 12px;
+        }
+
+        th {
+            background-color: #394248;
+            color: #fff;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+
+        #resultado {
+            font-weight: bold;
+        }
+
+        #enrere-button {
+            float: left;
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+        }
+        #nota-final {
+font-size: 0.8em; /* Reducir el tamaño de la fuente */
+color: #ffffff;     /* Cambiar el color del texto a un tono más tenue */
+margin-left: 60px; /* Agregar un pequeño margen izquierdo para separar del título principal */
+}
+input[type="number"] {
+        width:75px; /* Ajusta el ancho según tus preferencias */
+        padding: 8px;
+        box-sizing: border-box;
+    }
+
+    </style>
+</head>
+<body>
+    <button id="enrere-button" onclick="enrere()">Enrere</button>
+    <h1>Calcular Mitjana - Matemàtiques <span id="nota-final"></span></h1>
+
+    <h3>Criteris</h3>
+    <table>
+        <tr>
+            <th>Nom</th>
+            <th>Mitjana</th>
+            <th>Percentatge de la nota total</th>
+           
+         
+        </tr>
+        <tr>
+            <td>Exàmens</td>
+            <td><span id="mitjanesExamensMates"></span></td>
+            <td><input type="number" id="percentatgeExamensMates" onchange="guardarNumero('percentatgeExamensMates')">%</td>
+        </tr>
+        <tr>
+            <td>Treballs</td>
+            <td><input type="number"  id="notaMitjanaTreballsMates" onchange="guardarNumero('notaMitjanaTreballsMates')"></td>
+            <td><input type="number" id="percentatgeTreballsMates" onchange="guardarNumero('percentatgeTreballsMates')">%</td>
+        </tr>
+        <tr>
+            <td>Altres</td>
+            <td><input type="number"  id="notaMitjanaAltresMates" onchange="guardarNumero('notaMitjanaAltresMates')"></td>
+            <td><span id = "percentatgeAltresMates"></span></td>
+        </tr>
+    </table>
+    <h3>Examens</h3>
+    <table>
+        <tr>
+            <th>Nom Exàmen</th>
+            <th>Nota</th>
+            <th>Percentatge </th>
+        </tr>
+
+        <tr>
+            <td>
+                Examen1
+            </td>
+            <td>
+                <input type="number" id="notaExamen1Mates" onchange="guardarNumero('notaExamen1Mates')">
+               
+            </td>
+            <td>
+                <input type="number"  id="percentatgeExamen1Mates" onchange="guardarNumero('percentatgeExamen1Mates')">% </td>
+        </tr>
+        <tr>
+            <td>
+                Examen2
+            </td>
+            <td>
+                <input type="number" id="notaExamen2Mates" onchange="guardarNumero('notaExamen2Mates')"></td>
+               
+            </td>
+            <td>
+                <input type="number"  id="percentatgeExamen2Mates"onchange="guardarNumero('percentatgeExamen2Mates')">%</td>
+        </tr>
+        <tr>
+            <td>
+                Examen3
+            </td>
+            <td>
+                <input type="number" id="notaExamen3Mates" onchange="guardarNumero('notaExamen3Mates')"></td>
+               
+            </td>
+            <td>
+                <input type="number"  id="percentatgeExamen3Mates"  onchange="guardarNumero('percentatgeExamen3Mates')">% </td>
+        </tr>
+        <tr>
+            <td>
+                Examen4
+            </td>
+            <td>
+                <input type="number" id="notaExamen4Mates" onchange="guardarNumero('notaExamen4Mates')"></td>
+               
+ </td>
+            <td>
+                <input type="number"  id="percentatgeExamen4Mates"  onchange="guardarNumero('percentatgeExamen4Mates')">%</td>
+        </tr>
+    </table>
+<script >
+    var TextAccesBooleana = localStorage.getItem("acces")
+var acces =  JSON.parse(TextAccesBooleana)
+if (acces){
+
+
+var notaMitjanaTreballsMatesInput = document.getElementById("notaMitjanaTreballsMates")
+var percentatgeTreballsMatesInput = document.getElementById("percentatgeTreballsMates")
+var percentatgeExamensMatesInput = document.getElementById('percentatgeExamensMates');
+var mitjanesExamensMatesSpan = document.getElementById('mitjanesExamensMates');
+var percentatgeAltresMates = document.getElementById('percentatgeAltresMates')
+var notaMitjanaAltresMatesInput = document.getElementById('notaMitjanaAltresMates')
+
+// Inputs d'examens Notes
+var notaExamen1MatesInput = document.getElementById('notaExamen1Mates') 
+var notaExamen2MatesInput = document.getElementById('notaExamen2Mates')
+var notaExamen3MatesInput = document.getElementById('notaExamen3Mates')
+var notaExamen4MatesInput = document.getElementById('notaExamen4Mates')
+var percentatgeExamen1MatesInput = document.getElementById('percentatgeExamen1Mates')
+var percentatgeExamen2MatesInput = document.getElementById('percentatgeExamen2Mates')
+var percentatgeExamen3MatesInput = document.getElementById('percentatgeExamen3Mates')
+var percentatgeExamen4MatesInput = document.getElementById('percentatgeExamen4Mates')
+// Cargar valores almacenados en localStorage al cargar la página
+cargarNumero('percentatgeExamensMates');
+cargarNumero('percentatgeTreballsMates');
+cargarNumero('percentatgeAltresMates')
+cargarNumero('notaExamen1Mates')
+cargarNumero('notaExamen2Mates')
+cargarNumero('notaExamen3Mates')  
+cargarNumero('notaExamen4Mates')
+cargarNumero('percentatgeExamen1Mates')
+cargarNumero('percentatgeExamen2Mates')
+cargarNumero('percentatgeExamen3Mates')
+cargarNumero('percentatgeExamen4Mates')
+cargarNumero('notaMitjanaTreballsMates')
+cargarNumero('notaMitjanaAltresMates')
+calcularrestant();
+calcularnotafinal();
+calcularmitjanesExamensMates()
+percentatgeExamensMatesInput.addEventListener('input', function() {
+    calcularnotafinal();
+  calcularrestant();
+ 
+  calcularmitjanesExamensMates();
+  guardarNumero('percentatgeExamensMates');
+});
+
+percentatgeTreballsMatesInput.addEventListener('input',function(){
+    calcularnotafinal();
+calcularrestant();
+
+calcularmitjanesExamensMates();
+guardarNumero ('percentatgeTreballsMates')
+})
+
+
+notaExamen1MatesInput.addEventListener('input',function(){
+    calcularnotafinal()
+calcularrestant();
+guardarNumero('notaExamen1Mates')
+calcularmitjanesExamensMates();
+})
+notaExamen2MatesInput.addEventListener('input',function(){
+    calcularnotafinal()
+calcularrestant();
+guardarNumero('notaExamen2Mates')
+calcularmitjanesExamensMates();
+})
+notaExamen3MatesInput.addEventListener('input',function(){
+    calcularnotafinal()
+calcularrestant();
+guardarNumero('notaExamen3Mates')
+calcularmitjanesExamensMates();
+})
+notaExamen4MatesInput.addEventListener('input',function(){
+    calcularnotafinal()
+calcularrestant();
+guardarNumero('notaExamen4Mates')
+calcularmitjanesExamensMates();
+})
+percentatgeExamen1MatesInput.addEventListener('input',function(){
+calcularrestant();
+calcularnotafinal();
+guardarNumero('percentatgeExamen1Mates')
+calcularmitjanesExamensMates();
+})
+percentatgeExamen2MatesInput.addEventListener('input',function(){
+    calcularnotafinal()
+calcularrestant();
+guardarNumero('percentatgeExamen2Mates')
+calcularmitjanesExamensMates();
+})
+percentatgeExamen3MatesInput.addEventListener('input',function(){
+    calcularnotafinal()
+calcularrestant();
+guardarNumero('percentatgeExamen3Mates')
+calcularmitjanesExamensMates();
+})
+percentatgeExamen4MatesInput.addEventListener('input',function(){
+    calcularnotafinal()
+calcularrestant();
+guardarNumero('percentatgeExamen4Mates')
+calcularmitjanesExamensMates();
+})
+
+notaMitjanaTreballsMatesInput.addEventListener('input',function(){
+    calcularnotafinal()
+calcularrestant();
+guardarNumero('notaMitjanaTreballsMatesInput')
+calcularmitjanesExamensMates();
+})
+notaMitjanaAltresMatesInput.addEventListener('input',function(){
+    calcularnotafinal()
+calcularrestant();
+guardarNumero('notaMitjanaAltresMatesInput')
+calcularmitjanesExamensMates();
+
+})
+function calcularnotafinal(){
+    var notaExamen1Mates = (parseFloat(notaExamen1MatesInput.value))      
+var notaExamen2Mates = (parseFloat(notaExamen2MatesInput.value))  
+var notaExamen3Mates = (parseFloat(notaExamen3MatesInput.value))  
+var notaExamen4Mates = (parseFloat(notaExamen4MatesInput.value))  
+var percentatgeExamen1Mates = (parseFloat(percentatgeExamen1MatesInput.value)*0.01)  
+var percentatgeExamen2Mates = (parseFloat(percentatgeExamen2MatesInput.value)*0.01)  
+var percentatgeExamen3Mates = (parseFloat(percentatgeExamen3MatesInput.value)*0.01)  
+var percentatgeExamen4Mates = (parseFloat(percentatgeExamen4MatesInput.value)*0.01)  
+
+if (isNaN(notaExamen1Mates)){
+notaExamen1Mates = 0;
+}
+if (isNaN(notaExamen2Mates)){
+notaExamen2Mates = 0;
+}
+if (isNaN(notaExamen3Mates)){
+notaExamen3Mates = 0;
+}
+if (isNaN(notaExamen4Mates)){
+notaExamen4Mates = 0;
+}
+if (isNaN(percentatgeExamen1Mates)){
+percentatgeExamen1Mates = 0;
+}
+if (isNaN(percentatgeExamen2Mates)){
+percentatgeExamen2Mates = 0;
+}
+if (isNaN(percentatgeExamen3Mates)){
+percentatgeExamen3Mates = 0;
+}
+if (isNaN(percentatgeExamen4Mates)){
+percentatgeExamen4Mates = 0;
+}
+
+mitjanesExamensMatesSpan.textContent = ((notaExamen1Mates*percentatgeExamen1Mates)+(notaExamen2Mates*percentatgeExamen2Mates)+(notaExamen3Mates*percentatgeExamen3Mates)+(notaExamen4Mates*percentatgeExamen4Mates));
+
+
+var percentatgeExamensMates = (parseFloat(percentatgeExamensMatesInput.value))
+var notaMitjanaTreballsMates  = (parseFloat(notaMitjanaTreballsMatesInput.value))
+var notaMitjanaAltresMates= (parseFloat(notaMitjanaAltresMatesInput.value))
+var percentatgeTreballsMates = (parseFloat(percentatgeTreballsMatesInput.value))
+var mitjanesExamensMatesNotaFinal = ((notaExamen1Mates*percentatgeExamen1Mates)+(notaExamen2Mates*percentatgeExamen2Mates)+(notaExamen3Mates*percentatgeExamen3Mates)+(notaExamen4Mates*percentatgeExamen4Mates))
+
+
+if (isNaN(mitjanesExamensMatesNotaFinal)) {
+    mitjanesExamensMatesNotaFinal = 0; 
+}
+
+if (isNaN(notaMitjanaTreballsMates)) {
+    notaMitjanaTreballsMates = 0; 
+}
+if (isNaN(notaMitjanaAltresMates)) {
+    notaMitjanaAltresMates = 0; 
+}
+
+if (isNaN(percentatgeTreballsMates)) {
+percentatgeTreballsMates = 0; 
+}
+
+if (isNaN(percentatgeExamensMates)) {
+percentatgeExamensMates = 0; 
+}
+    percentatgeAltresMates1 = 100-(percentatgeExamensMates+percentatgeTreballsMates);
+
+
+
+    // Calcular la nota final
+   
+var notaFinal = (((mitjanesExamensMatesNotaFinal)*((percentatgeExamensMates)*0.01))+((notaMitjanaTreballsMates)*((percentatgeTreballsMates)*0.01))+((notaMitjanaAltresMates)*((percentatgeAltresMates1)*0.01)))
+if (isNaN(notaFinal)){
+    notaFinal = 0
+}
+
+    // Mostrar la nota final
+    document.getElementById("nota-final").textContent = "Nota Final: " + notaFinal.toFixed(2);
+}
+
+function calcularmitjanesExamensMates(){
+var notaExamen1Mates = (parseFloat(notaExamen1MatesInput.value))      
+var notaExamen2Mates = (parseFloat(notaExamen2MatesInput.value))  
+var notaExamen3Mates = (parseFloat(notaExamen3MatesInput.value))  
+var notaExamen4Mates = (parseFloat(notaExamen4MatesInput.value))  
+var percentatgeExamen1Mates = (parseFloat(percentatgeExamen1MatesInput.value)*0.01)  
+var percentatgeExamen2Mates = (parseFloat(percentatgeExamen2MatesInput.value)*0.01)  
+var percentatgeExamen3Mates = (parseFloat(percentatgeExamen3MatesInput.value)*0.01)  
+var percentatgeExamen4Mates = (parseFloat(percentatgeExamen4MatesInput.value)*0.01)  
+
+if (isNaN(notaExamen1Mates)){
+notaExamen1Mates = 0;
+}
+if (isNaN(notaExamen2Mates)){
+notaExamen2Mates = 0;
+}
+if (isNaN(notaExamen3Mates)){
+notaExamen3Mates = 0;
+}
+if (isNaN(notaExamen4Mates)){
+notaExamen4Mates = 0;
+}
+if (isNaN(percentatgeExamen1Mates)){
+percentatgeExamen1Mates = 0;
+}
+if (isNaN(percentatgeExamen2Mates)){
+percentatgeExamen2Mates = 0;
+}
+if (isNaN(percentatgeExamen3Mates)){
+percentatgeExamen3Mates = 0;
+}
+if (isNaN(percentatgeExamen4Mates)){
+percentatgeExamen4Mates = 0;
+}
+
+mitjanesExamensMatesSpan.textContent = ((notaExamen1Mates*percentatgeExamen1Mates)+(notaExamen2Mates*percentatgeExamen2Mates)+(notaExamen3Mates*percentatgeExamen3Mates)+(notaExamen4Mates*percentatgeExamen4Mates));
+
+}
+
+
+function calcularrestant(){
+var percentatgeExamensMates = parseFloat(percentatgeExamensMatesInput.value)
+var percentatgeTreballsMates = parseFloat(percentatgeTreballsMatesInput.value)
+if (isNaN(percentatgeTreballsMates)) {
+percentatgeTreballsMates = 0; 
+}
+
+if (isNaN(percentatgeExamensMates)) {
+percentatgeExamensMates = 0; 
+}
+    percentatgeAltresMates.textContent = (100-(percentatgeExamensMates+percentatgeTreballsMates)+"%");
+}  
+
+
+function guardarNumero(id) {
+  var input = document.getElementById(id);
+  var valor = input.value;
+  localStorage.setItem(id, valor);
+}
+
+function cargarNumero(id) {
+  var valor = localStorage.getItem(id);
+  if (valor !== null) {
+      document.getElementById(id).value = valor;
+  }
+}
+
+function enrere() {
+  window.location.href = "mitjananotes.html";
+}
+
+
+}else{
+
+window.location.href="404.html"
+}
+   
+document.oncontextmenu = function () {
+
+  return false;
+};
+
+document.onkeydown = function (e) {
+  if (e.keyCode == 123) {
+  
+    return false;
+  }
+
+  if (e.ctrlKey && e.shiftKey && e.keyCode === 73) {
+  
+    return false;
+  }
+  if (e.ctrlKey && e.keyCode == 85){
+  
+    return false;
+  }
+};
+
+
+document.onmousedown = function (e) {
+  if (e.button === 2) {
+  
+    return false;
+  }
+};
+
+
+</script>
+  
+</body>
+</html>
