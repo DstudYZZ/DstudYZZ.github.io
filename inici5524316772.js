@@ -7,6 +7,12 @@ if (acces){
     document.getElementById("nomUsuari").textContent = ("Hola, "+nomUsuari)
     var curs = localStorage.getItem("curs")
     document.getElementById("curs").textContent = (curs)
+
+    
+    window.addEventListener("beforeunload", function () {
+      // Modificar la variable 'acces' a false antes de cerrar la página
+      localStorage.setItem("acces", JSON.stringify(false));
+  });
     
 }else{
     
