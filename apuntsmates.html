@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apunts de Matemàtiques</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #f4f4f4;
+      color: white;
+      padding: 10px;
+     
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 50px auto;
+      text-align: center;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      margin: 0;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #4caf50;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+
+    button:hover {
+      opacity: 0.8;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin-top: 20px;
+    }
+
+    li {
+      margin-bottom: 10px;
+      cursor: pointer;
+      background-color: #fff;
+      padding: 10px;
+      border-radius: 4px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      transition: background-color 0.3s ease;
+    }
+
+    li:hover {
+      background-color: #f9f9f9;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    .modal-content {
+      background-color: #fefefe;
+      margin: 10% auto;
+      padding: 20px;
+      border: 1px solid #888;
+      max-width: 800px;
+      border-radius: 8px;
+    }
+
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .close:hover,
+    .close:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    label {
+      margin-bottom: 5px;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    textarea {
+      height: 150px;
+    }
+
+    #saveNoteBtn,
+    #deleteNoteBtn {
+      background-color: #4caf50;
+      color: white;
+      border: none;
+      padding: 10px;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+
+    #deleteNoteBtn {
+      background-color: #f44336;
+    }
+
+    #saveNoteBtn:hover,
+    #deleteNoteBtn:hover {
+      opacity: 0.8;
+    }
+    #noteContent {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  height: 200px;
+  font-family: 'Arial', sans-serif;; /* Cambiar la fuente a monoespaciada para un aspecto de código */
+  font-size: 14px; /* Cambiar el tamaño del texto */
+  color: #333; /* Cambiar el color del texto */
+  border: 1px solid #ccc; /* Añadir un borde al área de texto */
+}
+
+  </style>
+</head>
+<body>
+    <div class="header">
+        <button onclick="enrere()">Enrere</button>
+        
+      
+      </div>
+
+
+<div class="container">
+    <h1>Apunts de Matemàtiques/h1>
+  <button id="addNoteBtn">Afegir apunts</button>
+  <ul id="notesList"></ul>
+</div>
+
+<div id="modal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h2 id="modalTitle">Afegir apunts</h2>
+    <form id="noteForm">
+      <label for="noteTitle">Títol:</label>
+      <input type="text" id="noteTitle" placeholder="Títol" required>
+      <label for="noteContent">Apunts:</label>
+      <textarea id="noteContent" placeholder="Escriu els teus apunts" required></textarea>
+      <button id="saveNoteBtn">Guardar</button>
+      <br>
+      <button id="deleteNoteBtn">Borrar</button>
+    </form>
+  </div>
+</div>
+
+<script>
+   function enrere(){
+window.location.href = "apunts.html"
+    }
+  document.addEventListener("DOMContentLoaded", function () {
+    const addNoteBtn = document.getElementById("addNoteBtn");
+    const modal = document.getElementById("modal");
+    const closeModalBtn = document.querySelector(".close");
+    const saveNoteBtn = document.getElementById("saveNoteBtn");
+    const deleteNoteBtn = document.getElementById("deleteNoteBtn");
+    const notesList = document.getElementById("notesList");
+    const noteForm = document.getElementById("noteForm");
+    const noteTitleInput = document.getElementById("noteTitle");
+    const noteContentInput = document.getElementById("noteContent");
+    const modalTitle = document.getElementById("modalTitle");
+    const projectPrefix = "myProject_";
+
+    addNoteBtn.addEventListener("click", function () {
+      modal.style.display = "block";
+      modalTitle.textContent = "Afegir apunts";
+      noteForm.reset();
+    });
+
+    closeModalBtn.addEventListener("click", function () {
+      modal.style.display = "none";
+    });
+
+    saveNoteBtn.addEventListener("click", function (event) {
+      event.preventDefault();
+
+      const title = noteTitleInput.value;
+      const content = noteContentInput.value;
+
+      if (title && content) {
+        if (isTitleAlreadyExists(title)) {
+          alert("No es permet guardar apunts amb el mateix títol");
+        } else {
+          saveNoteToLocalStorage(title, content);
+          modal.style.display = "none";
+          displayNotes();
+        }
+      } else {
+        if (isTitleAlreadyExists(title)) {
+          alert("No es permet guardar apunts amb el mateix títol");
+        } else {
+          saveNoteToLocalStorage(title, content);
+          modal.style.display = "none";
+          displayNotes();
+        }
+      }
+    });
+
+    // Función para verificar si un título ya existe
+    function isTitleAlreadyExists(title) {
+      for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        if (key.startsWith(projectPrefix) && key.replace(projectPrefix, "") === title) {
+          return true;
+        }
+      }
+      return false;
+    }
+
+    deleteNoteBtn.addEventListener("click", function (event) {
+      event.preventDefault();
+      const title = noteTitleInput.value;
+
+      if (title && confirm("Estàs segur d'eliminar aquests apunts?")) {
+        deleteNoteFromLocalStorage(title);
+        modal.style.display = "none";
+        displayNotes();
+      }
+    });
+
+    notesList.addEventListener("click", function (event) {
+      const target = event.target;
+      if (target.tagName === "LI") {
+        const title = target.textContent;
+        const content = localStorage.getItem(projectPrefix + title);
+
+        modal.style.display = "block";
+        modalTitle.textContent = "Editar Apunts";
+        noteTitleInput.value = title;
+        noteContentInput.value = content;
+      }
+    });
+
+    // Cargar notas almacenadas al cargar la página
+    displayNotes();
+
+    function saveNoteToLocalStorage(title, content) {
+      const uniqueKey = projectPrefix + title;
+      localStorage.setItem(uniqueKey, content);
+    }
+
+    function deleteNoteFromLocalStorage(title) {
+      const uniqueKey = projectPrefix + title;
+      localStorage.removeItem(uniqueKey);
+    }
+
+    function displayNotes() {
+      // Limpiar la lista antes de volver a cargar las notas
+      notesList.innerHTML = "";
+
+      // Recorrer las claves del almacenamiento local (títulos de notas)
+      for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+
+        // Verificar si la clave pertenece a tu proyecto
+        if (key.startsWith(projectPrefix)) {
+          const title = key.replace(projectPrefix, "");
+          const noteItem = document.createElement("li");
+          noteItem.textContent = title;
+          notesList.appendChild(noteItem);
+        }
+      }
+    }
+  });
+</script>
+</body>
+</html>
