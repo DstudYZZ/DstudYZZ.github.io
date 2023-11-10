@@ -8,30 +8,31 @@
 <body>
     <script>
          var curs = localStorage.getItem("curs")
- 
-    switch (curs){
-        case("1ESO"):
-        alert ("Curses 1R");
 
-        case("2ESO"):
-            alert ("Curses 2n ESO")
-         case("3ESO"):
-            alert ("Curses 3r ESO")
-        
-            case("4ESO"):
-            alert ("Curses 4t ESO")
-            case("1BATX"):
-            alert ("Curses 1r de Batxillerat")
-            case("2BATX"):
-            alert ("Curses 2n de Batxillerat")
-            case("CFGM"):
-            alert ("Curses Cicles formatius de graus Mitjà")
-            case("CFGS"):
-            alert ("Curses cicles formatius de graus Superior")
-        
-        
-    }
-    
+if (curs == "1ESO"){
+    window.location.href ("llibres1ESO.html")
+}
+if (curs == "2ESO"){
+    window.location.href ("llibres2ESO.html")
+}
+if (curs == "3ESO"){
+    window.location.href ("llibres3ESO.html")
+}
+if (curs == "4ESO"){
+    window.location.href ("llibres4ESO.html")
+}
+if (curs == "1BATX"){
+    window.location.href ("llibres1BATX.html")
+}
+if (curs == "2BATX"){
+    window.location.href ("llibres2BATX.html")
+}
+if (curs == "CFGM"){
+    window.location.href ("llibresCFGM.html")
+}
+if (curs == "CFGS"){
+    window.location.href ("llibresCFGS.html")
+}    
     </script>
 </body>
 </html>
