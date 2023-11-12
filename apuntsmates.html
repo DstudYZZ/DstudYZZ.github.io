@@ -225,7 +225,13 @@ window.location.href = "apunts.html"
 
       if (title) {
         if (isTitleAlreadyExists(title)) {
-          alert("No es permet guardar apunts amb el mateix títol");
+          if (confirm("Vols substituir els apunts "+title+"?")){
+            saveNoteToLocalStorage(title, content);
+          modal.style.display = "none";
+          displayNotes();
+          }else{
+
+          }
         } else {
           saveNoteToLocalStorage(title, content);
           modal.style.display = "none";
@@ -235,10 +241,20 @@ window.location.href = "apunts.html"
         alert ("Si us plau, introdueix un títol")
       }
      
+     
     });
 
     // Función para verificar si un título ya existe
-    
+    function isTitleAlreadyExists(title) {
+      for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        if (key.startsWith(projectPrefix) && key.replace(projectPrefix, "") === title) {
+          return true;
+        }
+      }
+      return false;
+    }
+
 
     deleteNoteBtn.addEventListener("click", function (event) {
       event.preventDefault();

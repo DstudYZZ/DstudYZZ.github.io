@@ -225,7 +225,13 @@ window.location.href = "apunts.html"
 
       if (title) {
         if (isTitleAlreadyExists(title)) {
-          alert("No es permet guardar apunts amb el mateix títol");
+          if (confirm("Vols substituir els apunts "+title+"?")){
+            saveNoteToLocalStorage(title, content);
+          modal.style.display = "none";
+          displayNotes();
+          }else{
+
+          }
         } else {
           saveNoteToLocalStorage(title, content);
           modal.style.display = "none";
