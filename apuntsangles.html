@@ -225,14 +225,17 @@ window.location.href = "apunts.html"
       const content = noteContentInput.value;
 
       if (title) {
-       
-       saveNoteToLocalStorage(title, content);
-       modal.style.display = "none";
-       displayNotes();
+        if (isTitleAlreadyExists(title)) {
+          alert("No es permet guardar apunts amb el mateix títol");
+        } else {
+          saveNoteToLocalStorage(title, content);
+          modal.style.display = "none";
+          displayNotes();
+        }
+      } else {
+        alert ("Si us plau, introdueix un títol")
+      }
      
-   } else {
-    alert ("Si us plau, introdueix un títol")
-   }
     });
 
     // Función para verificar si un título ya existe
