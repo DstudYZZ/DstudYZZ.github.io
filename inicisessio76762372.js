@@ -8,7 +8,7 @@ var contrasenyaUsuari = localStorage.getItem("contrasenyaUsuari")
 var nomUsuariIntroduit = document.getElementById("IDaccesUsuari").value;
 var contrasenyaIntroduida = document.getElementById("IDaccesContrasenya").value;
 var UsuarisBloquejats = [
-  "Llista d'usuaris bloquejats",
+// "Llista d'usuaris bloquejats",
 ]
 if (UsuarisBloquejats.includes(nomUsuariIntroduit)){
   alert ("Accés denegat. \nÉs posible que hagis violat les nostres normes, si creus que és un error, contacta'ns.")
