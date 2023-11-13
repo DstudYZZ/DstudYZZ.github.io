@@ -5,8 +5,7 @@ if (acces){
     
     var nomUsuari = localStorage.getItem("nomUsuari")
     document.getElementById("nomUsuari").textContent = ("Hola, "+nomUsuari)
-    var curs = localStorage.getItem("curs")
-    document.getElementById("curs").textContent = (curs)
+  
 
     
    
