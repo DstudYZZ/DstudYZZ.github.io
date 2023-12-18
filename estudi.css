@@ -1,13 +1,13 @@
 body {
   font-family: Arial, sans-serif;
-  background-color: #ffffff;
+  background-color: #000000;
   text-align: center;
   padding: 50px;
 }
 
 h1 {
   font-size: 48px;
-  color: #000000;
+  color: #b91b1b;
 }
 .botonsinici {
     display: flex;
@@ -38,7 +38,7 @@ h1 {
   }
   /**/
   .nom {
-    background-color: #fff;
+    background-color: #7c2121;
     border: 1px solid #ccc;
     border-radius: 5px;
     padding: 160px;
@@ -70,7 +70,7 @@ input[type="email"] {
     width: 100%;
     padding: 10px;
     margin: 10px 0;
-    border: 1px solid #ccc;
+    border: 1px solid #ff0000;
     border-radius: 5px;
 }
 #curs{
@@ -91,7 +91,7 @@ button {
 }
 
 button:hover {
-    background-color: #0056b3;
+    background-color: #5b0000;
 }
 .registrar,
 .iniciarsessio {
@@ -99,7 +99,7 @@ button:hover {
   margin: 20px;
   padding: 1,5%;
   color: rgb(255, 255, 255);
-  background-color: rgb(111, 101, 227);
+  background-color: rgb(180, 0, 0);
 }
 .botonsinici {
   display: flex;
@@ -161,3 +161,6 @@ button:hover {
   background-color: #0056b3;
 }
 
+a{
+  color: #d20b0b;
+}
