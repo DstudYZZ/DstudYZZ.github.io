@@ -56,12 +56,13 @@ h1 {
     align-items: center;
     height: 40vh;
     margin: 0;
-  background-color: #fff;
+  background-color: #7c2121;
   border: 1px solid #ccc;
   border-radius: 5px;
   padding: 20px;
   margin: 0 auto;
   max-width: 400px;
+  color: white
 }
 
 input[type="text"],
@@ -81,7 +82,7 @@ input[type="email"] {
     border-radius: 5px;
 }
 button {
-    background-color: #007BFF;
+    background-color: #a40000;
     color: #fff;
     padding: 10px 20px;
     border: none;
@@ -158,9 +159,12 @@ button:hover {
 }
 
 .inicis:hover {
-  background-color: #0056b3;
+  background-color: #750404;
 }
 
 a{
   color: #d20b0b;
+}
+ .nom{
+  color: rgb(255, 255, 255)
 }
