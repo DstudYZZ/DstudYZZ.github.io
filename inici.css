@@ -2,7 +2,7 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: rgb(157, 214, 214);
+    background-color: rgb(0, 0, 0);
 }
 
 
@@ -13,7 +13,7 @@ body {
     z-index: 1;
     top: 0;
     left: 0;
-    background-color: #524f81;
+    background-color: #bf2929;
     overflow-x: hidden;
     transition: 0.5s;
     padding-top: 20px;
@@ -30,7 +30,7 @@ body {
 }
 
 .sidebar a:hover {
-    background-color: #2b206c;
+    background-color: #000000;
 }
 #tancarsessio{
     background-color: darkslategray; 
@@ -58,7 +58,7 @@ body {
     padding: 15px 50px;
     text-decoration: none;
     font-size: 25px;
-    color: white;
+    color: rgb(0, 0, 0);
     display: block;
 }
 
@@ -77,3 +77,4 @@ body {
   
     width: 20px; /* Define el ancho deseado, por ejemplo, 20px */
 }
+
