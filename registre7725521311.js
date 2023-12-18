@@ -11,29 +11,31 @@ function guardarusuari() {
      if ((usuariacces=="")||(contrasenya1=="")||(contrasenya2=="")||(mailusuari=="")||(cognomusari=="")||(nomUsuari=="")){
       alert("Has d'omplenar tots els camps")
      }else{
+if (mailusuari.includes("@")){
+
 
      
-        if (contrasenya2 == contrasenya1){
-            var usuaricreat = true;
-            var TextUsuariCreatBooleana = JSON.stringify(usuaricreat);
-            localStorage.setItem('usuaricreat', TextUsuariCreatBooleana);
-            localStorage.setItem("nomUsuari", nomUsuari);
-            localStorage.setItem("nomusuariacces",usuariacces);
-            localStorage.setItem("contrasenyaUsuari",contrasenya1);
-            localStorage.setItem("mailusari",mailusuari);
-            localStorage.setItem("cognomusuari",cognomusari);
-           localStorage.setItem("curs",curs);
+     
+          var usuaricreat = true;
+          var TextUsuariCreatBooleana = JSON.stringify(usuaricreat);
+          localStorage.setItem('usuaricreat', TextUsuariCreatBooleana);
+          localStorage.setItem("nomUsuari", nomUsuari);
+          localStorage.setItem("nomusuariacces",usuariacces);
+          localStorage.setItem("contrasenyaUsuari",contrasenya1);
+          localStorage.setItem("mailusari",mailusuari);
+          localStorage.setItem("cognomusuari",cognomusari);
+         localStorage.setItem("curs",curs);
 
-             window.location.href = "inici.html";
-             acces = true;
-             var TextAccesBooleana = JSON.stringify(acces);
-            localStorage.setItem('acces', TextAccesBooleana); 
+           window.location.href = "inici.html";
+           acces = true;
+           var TextAccesBooleana = JSON.stringify(acces);
+          localStorage.setItem('acces', TextAccesBooleana); 
         }else{
-            alert ("Les contrasenyes no coincideixen")
-        }
+        alert ("Has d'escriure un mail vàlid")
       }
-    
     }
+  }
+    
  
 document.oncontextmenu = function () {
  
