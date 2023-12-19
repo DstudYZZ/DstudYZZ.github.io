@@ -5,9 +5,9 @@ body {
 }
 
 h1 {
-    background-color: #696c6d;
+    background-color: #bf0303;
     color: #fff;
-    padding: 20px;
+    padding: 15px;
     margin: 0;
 }
 
@@ -26,7 +26,7 @@ th, td {
 }
 
 th {
-    background-color: #394248;
+    background-color: #bf0303;
     color: #fff;
 }
 
@@ -42,11 +42,11 @@ input[type="number"] {
 
 #enrere-button {
     float: left;
-    background-color: #3498db;
+    background-color: #000000;
     color: #fff;
     border: none;
     padding: 10px 20px;
-    margin: 10px;
+    margin: 12px;
     cursor: pointer;
 }
 #nota-final {

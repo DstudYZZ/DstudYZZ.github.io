@@ -4,12 +4,283 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mitjana de notes</title>
-    <link rel="stylesheet" type="text/css" href="estudi.css">
+    <style>
+
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #000000;
+
+  padding: 50px;
+}
+
+h1 {
+  font-size: 48px;
+  color: #b91b1b;
+}
+.botonsinici {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+    margin: 0;
+
+  }
+  .nom{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 40vh;
+    margin: 0;
+
+    
+  }
+  /**/
+  .nom {
+    background-color: #7c2121;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 160px;
+    margin: 0 auto;
+    max-width: 400px;
+}
+#inicisessiocss{
+  display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 40vh;
+    margin: 0;
+  background-color: #7c2121;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 20px;
+  margin: 0 auto;
+  max-width: 400px;
+  color: white
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ff0000;
+    border-radius: 5px;
+}
+#curs{
+  width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+button {
+    background-color: #a40000;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #5b0000;
+}
+.registrar,
+.iniciarsessio {
+  font-size: 20px   ;
+  margin: 20px;
+  padding: 1,5%;
+  color: rgb(255, 255, 255);
+  background-color: rgb(180, 0, 0);
+}
+.botonsinici {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
+  margin: 0;
+
+}
+
+
+#assignaturaMitjanaCss {
+  width: 80%;
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilos para la etiqueta de selección */
+
+
+/* Estilos para el select */
+#assignaturaMitjana {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+#assignaturaapunts {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+/* Estilos para el botón */
+.llarg {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background-color: #007BFF;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.inicis:hover {
+  background-color: #750404;
+}
+
+a{
+  color: #d20b0b;
+}
+ .nom{
+  color: rgb(255, 255, 255)
+}
+h2{
+  color: white
+}
+
+
+.sidebar {
+    height: 100%;
+    width: 250px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #bf2929;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 20px;
+}
+
+.sidebar a {
+    padding: 15px 25px;
+    text-decoration: none;
+    font-size: 18px;
+    color: white;
+    display: block;
+    
+    
+}
+
+.sidebar a:hover {
+    background-color: #000000;
+}
+#tancarsessio{
+    background-color: darkslategray; 
+    padding: 15px 25 px; 
+ 
+    display: block;
+}
+.openbtn {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.closebtn {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+#continguts{
+    padding: 15px 50px;
+    text-decoration: none;
+    font-size: 25px;
+    color: rgb(0, 0, 0);
+    display: block;
+}
+
+#main {
+   margin-left: 250px;
+    padding: 16px;
+    color: rgb(255, 255, 255);
+}
+
+#main #titulo {
+    margin-left: 40px; /* Añadir margen izquierdo para el ícono de menú */
+    background: transparent; /* Fondo transparente para el título */
+    display: inline-block;
+    vertical-align: middle; /* Alinear verticalmente el título y el ícono de menú */
+}
+.icono-configuracion {
+  
+    width: 20px; /* Define el ancho deseado, por ejemplo, 20px */
+}
+
+
+
+
+
+    </style>
     <link rel="icon" href="Logo-sense-fons.png" type="image/x-icon">
 </head>
 <body>
-    <h2>Selecciona l'assignatura
-    </h2>
+    <div id="mySidebar" class="sidebar">
+        <h2 id ="continguts">Continguts</h2>
+        <a href="inici.html">Inici</a>
+       <a href="informacio.html">Informació</a>
+        <a href="mitjananotes.html">Mitjana de notes</a>
+        <a href="apunts.html">Apunts</a>
+        <a href="ia.html" >IA (NO DISPONIBLE)</a>
+        <a href="contacte.html">Contacte</a>
+        <a href="premium.html">
+            <img src="premium.png" alt="Icono de configuración" class="icono-configuracion">
+            Configurar premium
+        </a>
+       <a id ="tancarsessio" href="index.html">Tancar sessió</a>
+       <img src="Logo-sense-fons.png" alt="DStudYZZ  " width="200px" >
+ 
+    </div>
+
+    <center><h2>Selecciona l'assignatura</h2></center>
     <div id="assignaturaMitjanaCss">
         
           <label for="assignaturaMitjana"></label>
@@ -21,10 +292,9 @@
               <option value="angles">Anglès</option>
           </select>
          
-          <button onclick="seleccioassignaturamitjana()"  class="inicis">Continua</button>
+         <center> <button onclick="seleccioassignaturamitjana()"  class="inicis">Continua</button></center>
           <br>
-          <br>
-          <button onclick="enrere()"  class="inicis">Enrere</button>
+          
           </div>
           <script src="mitjananotes7766268899.js"></script>
           
