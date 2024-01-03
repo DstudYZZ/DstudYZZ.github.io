@@ -112,6 +112,30 @@ document.onmousedown = function (e) {
     <a href="contacte.html">Contacte</a>
    
 </div>
+<script>
+  function aceptarCookies() {
+      document.getElementById('cookie-banner').style.display = 'none';
+   
+  }
+function rechazarCookies(){
+  window.location.href = "about:blank"
+}
+  // Mostrar el banner de cookies si aún no se han aceptado
+  window.onload = function() {
+   
+     
+          document.getElementById('cookie-banner').style.display = 'block';
+      
+  };
+</script>
 
 </body>
+<div id="cookie-banner" style="display: none; background-color: #333; color: #fff; padding: 10px; position: fixed; bottom: 0; left: 0; width: 100%; text-align: center;">
+  Aquest lloc web, utilitza cookies per millorar l'experiència de l'usuari. Al continuar navegant, acceptes l'ús de les cookies.
+  <p>
+  <button onclick="aceptarCookies()">Acceptar</button>
+  <p>
+  <button onclick="rechazarCookies()">Rebutjar</button>
+</div>
+
 </html>
