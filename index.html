@@ -37,6 +37,13 @@
     <h1>DStudYZZ</h1>
     
     <script>
+
+var acces = localStorage.getItem("apb")
+var apb =  JSON.parse(acces)
+if (apb){
+  window.location.href="block.html"
+}else{
+
         acces = false;
         var TextAccesBooleana = JSON.stringify(acces);
             localStorage.setItem('acces', TextAccesBooleana);
@@ -74,7 +81,7 @@
            }
          
         }
-        
+      }
 document.oncontextmenu = function () {
  
   return false;

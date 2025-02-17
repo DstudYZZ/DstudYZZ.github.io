@@ -17,6 +17,8 @@ if (acces){
    window.location.href="404.html"
 }
 
+
+
 document.oncontextmenu = function () {
     
     return false;

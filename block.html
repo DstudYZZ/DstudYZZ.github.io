@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+}
+
+.ban-page {
+    text-align: center;
+    max-width: 600px;
+    margin: 100px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    color: #e74c3c;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #9f9f9f;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #505050;
+}
+
+    </style>
+    <title>Accés bloquejat</title>
+</head>
+<body>
+    <div class="ban-page">
+        <h1>Accés bloquejat!</h1>
+        <p>Els nostres moderadors han detectat un ús inadecuat del nostre bot. 
+            <p></p>Si us plau, consulta les nostres condicions d'ús.</p>
+        <button onclick="condicions()">Condicions d'ús</button>
+    </div>
+
+    <script>
+        var apb = localStorage.getItem("apb")
+var apb = JSON.parse (apb)
+if (!apb){
+    window.location.href="index.html"
+
+}
+function condicions() {
+    window.location.href = "condicions-dus.html"
+
+}
+document.oncontextmenu = function () {
+ 
+ return false;
+};
+
+document.onkeydown = function (e) {
+ if (e.keyCode == 123) {
+  
+   return false;
+ }
+
+ if (e.ctrlKey && e.shiftKey && e.keyCode === 73) {
+  
+   return false;
+ }
+ if (e.ctrlKey && e.keyCode == 85){
+  
+   return false;
+ }
+};
+
+
+document.onmousedown = function (e) {
+ if (e.button === 2) {
+  
+   return false;
+ }
+};
+
+    </script>
+</body>
+</html>

@@ -151,6 +151,9 @@ if (acces){
             if (cardNumber.length === 19 && expDate.length === 5 && cvv.length === 3) {
                 alert('Pago efectuat: 1,99 €');
                 window.location.href= "index.html"
+               var apb = true;
+        var TextAccesBooleana = JSON.stringify(acces);
+            localStorage.setItem('acces', TextAccesBooleana);
                 // Aquí puedes redirigir al usuario o realizar acciones adicionales.
             } else {
                 alert('Si us plau, omplena tots els camps');
